@@ -1,0 +1,23 @@
+{
+  "name": "katasemeion",
+  "version": "0.0.0",
+  "description": "A markdown-inspired markup language for formatting Biblical texts",
+  "main": "katasemeion.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Kazark/katasemeion.git"
+  },
+  "author": "Kazark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kazark/katasemeion/issues"
+  },
+  "homepage": "https://github.com/Kazark/katasemeion",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
