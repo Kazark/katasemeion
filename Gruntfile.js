@@ -27,7 +27,8 @@ module.exports = function(grunt) {
         jshint: {
             all: {
                 options: {
-                    undef: true
+                    undef: true,
+                    eqeqeq: true
                 },
                 files: {
                     src: mainOutputScript
