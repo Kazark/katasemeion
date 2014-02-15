@@ -1,17 +1,27 @@
 katasemeion.lexer = (function(tokens) {
     var self = this;
 
-    self.tokenizeOpenBracket = function(sourceStream) {
-        if (sourceStream.current === '[') {
-            sourceStream.advanceCursor();
-            if (sourceStream.current == '[') {
+    var makeSingleOrDoubleCharacterTokenizer = function(character, singleToken, doubleToken) {
+        return function(sourceStream) {
+            if (sourceStream.current === character) {
                 sourceStream.advanceCursor();
-                return tokens.DoubleOpenBracketToken();
+                if (sourceStream.current === character) {
+                    sourceStream.advanceCursor();
+                    return doubleToken();
+                }
+                return singleToken();
             }
-            return tokens.OpenBracketToken();
-        }
-        return null;
+            return null;
+        };
     };
+
+    self.tokenizeOpenBracket = makeSingleOrDoubleCharacterTokenizer(
+        '[', tokens.OpenBracket, tokens.DoubleOpenBracket
+    );
+
+    self.tokenizeCloseBracket = makeSingleOrDoubleCharacterTokenizer(
+        ']', tokens.CloseBracket, tokens.DoubleCloseBracket
+    );
 
     return self;
 })(katasemeion.tokens);

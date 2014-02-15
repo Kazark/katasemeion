@@ -41,12 +41,24 @@ describe('Κατασημεῖον tokens module', function() {
             return typeof(x.typeIs) === "function";
         };
 
-        it('should include open bracket token', function() {
-            expect(isTokenType(tokens.OpenBracketToken)).toBe(true);
+        it('should include open bracket', function() {
+            expect(isTokenType(tokens.OpenBracket)).toBe(true);
         });
 
-        it('should include double open bracket token', function() {
-            expect(isTokenType(tokens.DoubleOpenBracketToken)).toBe(true);
+        it('should include double open bracket', function() {
+            expect(isTokenType(tokens.DoubleOpenBracket)).toBe(true);
+        });
+
+        it('should include close bracket', function() {
+            expect(isTokenType(tokens.CloseBracket)).toBe(true);
+        });
+
+        it('should include double close bracket', function() {
+            expect(isTokenType(tokens.DoubleCloseBracket)).toBe(true);
+        });
+
+        it('should include underscore', function() {
+            expect(isTokenType(tokens.Underscore)).toBe(true);
         });
     });
 });

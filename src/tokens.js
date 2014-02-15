@@ -15,8 +15,11 @@ katasemeion.tokens = (function() {
         return makeToken;
     };
 
-    self.OpenBracketToken = self.makeTokenType(110);
-    self.DoubleOpenBracketToken = self.makeTokenType(120);
+    self.OpenBracket = self.makeTokenType(110);
+    self.CloseBracket = self.makeTokenType(111);
+    self.DoubleOpenBracket = self.makeTokenType(120);
+    self.DoubleCloseBracket = self.makeTokenType(121);
+    self.Underscore = self.makeTokenType(200);
 
     return self;
 })();
