@@ -43,7 +43,7 @@ describe('Κατασημεῖον lexer', function() {
     describe('close bracket tokenizer', function() {
         var tokenize =  lexer.tokenizeCloseBracket;
 
-        it('should do nothing if there is no brackeat the beginning of the stream', function() {
+        it('should do nothing if there is no bracket at the beginning of the stream', function() {
             var characters = sourceStream('a]df');
             var token = tokenize(characters);
             expect(token).toBeFalsy();

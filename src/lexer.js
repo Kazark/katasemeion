@@ -5,18 +5,18 @@ katasemeion.lexer = (function(tokens) {
         return {
             thenReturn: function(thenToken) {
                 var _elseToken;
-                var makeTokenizer = function(sourceStream) {
+                var tokenize = function(sourceStream) {
                     if (sourceStream.current === character) {
                         sourceStream.advanceCursor();
                         return thenToken();
                     }
                     return _elseToken ? _elseToken() : null;
                 };
-                makeTokenizer.elseReturn = function(elseToken) {
+                tokenize.elseReturn = function(elseToken) {
                     _elseToken = elseToken;
-                    return makeTokenizer;
+                    return tokenize;
                 };
-                makeTokenizer.elifDoubleReturn = function(doubledToken) {
+                tokenize.elifDoubledReturn = function(doubledToken) {
                     return function(sourceStream) {
                         return ifCharIs(character).
                                thenReturn(function() {
@@ -26,17 +26,17 @@ katasemeion.lexer = (function(tokens) {
                                })(sourceStream);
                     };
                 };
-                return makeTokenizer;
+                return tokenize;
             }
         };
     };
 
     self.tokenizeOpenBracket = ifCharIs('[').
                                thenReturn(tokens.OpenBracket).
-                               elifDoubleReturn(tokens.DoubleOpenBracket);
+                               elifDoubledReturn(tokens.DoubleOpenBracket);
     self.tokenizeCloseBracket = ifCharIs(']').
                                 thenReturn(tokens.CloseBracket).
-                                elifDoubleReturn(tokens.DoubleCloseBracket);
+                                elifDoubledReturn(tokens.DoubleCloseBracket);
     self.tokenizeUnderscore = ifCharIs('_').
                               thenReturn(tokens.Underscore);
 
