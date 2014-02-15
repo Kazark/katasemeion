@@ -8,7 +8,11 @@ module.exports = function(grunt) {
             },
             app: {
                 dest: mainOutputScript,
-                src: [ 'src/*.js' ]
+                src: [
+                    'src/intro.js.frag',
+                    'src/*.js',
+                    'src/outro.js.frag'
+                ]
             }
         },
         watch: {

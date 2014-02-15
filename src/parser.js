@@ -1,4 +1,4 @@
-var parser = (function() {
+katasemeion.parser = (function() {
     var self = this;
     self.parse = function(inputText) {
         var output = {
