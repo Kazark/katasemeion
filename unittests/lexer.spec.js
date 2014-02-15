@@ -1,38 +1,40 @@
 describe('Κατασημεῖον lexer', function() {
     var lexer = katasemeion.lexer;
+    var tokens = katasemeion.tokens;
+    var sourceStream = katasemeion.sourceStream;
 
     it('should exist', function() {
         expect(lexer).toBeTruthy();
     });
 
-    describe('token type factory', function() {
-        var makeTokenType = lexer.makeTokenType;
+    describe('open bracket tokenizer', function() {
+        var tokenize =  lexer.tokenizeOpenBracket;
 
-        it('should create token types', function() {
-            var tokenType = makeTokenType(1);
-            expect(tokenType).toBeTruthy();
+        it('should do nothing if there is no bracket in the stream', function() {
+            var token = tokenize(sourceStream('asdf'));
+            expect(token).toBeFalsy();
         });
 
-        describe('a token type', function() {
-            it('should be a token factory', function() {
-                var token = makeTokenType(1)();
-                expect(token).toBeTruthy();
-            });
+        it('should return an open bracket token when stream cursor points to an open bracket', function() {
+            var token = tokenize(sourceStream('[sdf'));
+            expect(token.is(tokens.OpenBracketToken)).toBe(true);
+        });
 
-            describe('a token', function() {
-                it('should know its type', function() {
-                    var tokenType = makeTokenType(1);
-                    var token = tokenType();
-                    expect(token.is(tokenType)).toBe(true);
-                });
+        it('should advance the cursor when it has parsed an open bracket token', function() {
+            var characters = sourceStream('[sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+        });
 
-                it('should know it is not of another type', function() {
-                    var tokenType1 = makeTokenType(1);
-                    var tokenType2 = makeTokenType(2);
-                    var token = tokenType1();
-                    expect(token.is(tokenType2)).toBe(false);
-                });
-            });
+        it('should return a double open bracket token when stream is at two open brackets', function() {
+            var token = tokenize(sourceStream('[[df'));
+            expect(token.is(tokens.DoubleOpenBracketToken)).toBe(true);
+        });
+
+        it('should advance the cursor when it has parsed a double open bracket token', function() {
+            var characters = sourceStream('[[df');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
         });
     });
 });

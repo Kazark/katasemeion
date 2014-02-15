@@ -10,7 +10,10 @@ module.exports = function(grunt) {
                 dest: mainOutputScript,
                 src: [
                     'src/intro.js.frag',
-                    'src/*.js',
+                    'src/sourceStream.js',
+                    'src/tokens.js',
+                    'src/lexer.js',
+                    'src/parser.js',
                     'src/outro.js.frag'
                 ]
             }
@@ -23,8 +26,11 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: {
+                options: {
+                    undef: true
+                },
                 files: {
-                    src: ['build/app.js']
+                    src: mainOutputScript
                 }
             }
         },

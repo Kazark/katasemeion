@@ -1,17 +1,17 @@
-katasemeion.lexer = (function() {
+katasemeion.lexer = (function(tokens) {
     var self = this;
-    self.makeTokenType = function(typeCode) {
-        var makeToken = function() {
-            return {
-                is: function(tokenType) {
-                    return tokenType.typeIs(typeCode);
-                }
-            };
-        };
-        makeToken.typeIs = function(x) {
-            return typeCode === x;
-        };
-        return makeToken;
+
+    self.tokenizeOpenBracket = function(sourceStream) {
+        if (sourceStream.current === '[') {
+            sourceStream.advanceCursor();
+            if (sourceStream.current == '[') {
+                sourceStream.advanceCursor();
+                return tokens.DoubleOpenBracketToken();
+            }
+            return tokens.OpenBracketToken();
+        }
+        return null;
     };
+
     return self;
-})();
+})(katasemeion.tokens);
