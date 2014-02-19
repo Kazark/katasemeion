@@ -57,6 +57,14 @@ describe('Κατασημεῖον tokens module', function() {
             expect(isTokenType(tokens.DoubleCloseBracket)).toBe(true);
         });
 
+        it('should include asterisk', function() {
+            expect(isTokenType(tokens.Asterisk)).toBe(true);
+        });
+
+        it('should include double asterisk', function() {
+            expect(isTokenType(tokens.DoubleAsterisk)).toBe(true);
+        });
+
         it('should include underscore', function() {
             expect(isTokenType(tokens.Underscore)).toBe(true);
         });

@@ -33,7 +33,7 @@ describe('Κατασημεῖον lexer', function() {
             expect(token.is(tokens.DoubleOpenBracket)).toBe(true);
         });
 
-        it('should advance the cursor when it has parsed a token', function() {
+        it('should advance the cursor when it has parsed a double open bracket token', function() {
             var characters = sourceStream('[[df');
             var token = tokenize(characters);
             expect(characters.current).toBe('d');
@@ -66,8 +66,41 @@ describe('Κατασημεῖον lexer', function() {
             expect(token.is(tokens.DoubleCloseBracket)).toBe(true);
         });
 
-        it('should advance the cursor when it has parsed a token', function() {
+        it('should advance the cursor when it has parsed a double close bracket token', function() {
             var characters = sourceStream(']]df');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
+        });
+    });
+
+    describe('asterisk tokenizer', function() {
+        var tokenize =  lexer.tokenizeAsterisk;
+
+        it('should do nothing if there is no asterisk at the beginning of the stream', function() {
+            var characters = sourceStream('a*df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return an asterisk token when stream cursor points to an asterisk', function() {
+            var token = tokenize(sourceStream('*sdf'));
+            expect(token.is(tokens.Asterisk)).toBe(true);
+        });
+
+        it('should advance the cursor when it has parsed an asterisk token', function() {
+            var characters = sourceStream('*sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+        });
+
+        it('should return a double asterisk token when stream is at two asterisk', function() {
+            var token = tokenize(sourceStream('**df'));
+            expect(token.is(tokens.DoubleAsterisk)).toBe(true);
+        });
+
+        it('should advance the cursor when it has parsed a double asterisk token', function() {
+            var characters = sourceStream('**df');
             var token = tokenize(characters);
             expect(characters.current).toBe('d');
         });

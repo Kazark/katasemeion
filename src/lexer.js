@@ -39,6 +39,9 @@ katasemeion.lexer = (function(tokens) {
                                 elifDoubledReturn(tokens.DoubleCloseBracket);
     self.tokenizeUnderscore = ifCharIs('_').
                               thenReturn(tokens.Underscore);
+    self.tokenizeAsterisk = ifCharIs('*').
+                            thenReturn(tokens.Asterisk).
+                            elifDoubledReturn(tokens.DoubleAsterisk);
 
     return self;
 })(katasemeion.tokens);

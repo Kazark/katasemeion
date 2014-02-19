@@ -20,6 +20,8 @@ katasemeion.tokens = (function() {
     self.DoubleOpenBracket = self.makeTokenType(120);
     self.DoubleCloseBracket = self.makeTokenType(121);
     self.Underscore = self.makeTokenType(200);
+    self.Asterisk = self.makeTokenType(310);
+    self.DoubleAsterisk = self.makeTokenType(320);
 
     return self;
 })();
