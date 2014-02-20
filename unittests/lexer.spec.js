@@ -127,4 +127,49 @@ describe('Κατασημεῖον lexer', function() {
             expect(characters.current).toBe('s');
         });
     });
+
+    describe('spaces tokenizer', function() {
+        var tokenize =  lexer.tokenizeSpaces;
+
+        it('should do nothing if there is no space at the beginning of the stream', function() {
+            var characters = sourceStream('a    df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a space token when stream cursor points to one space', function() {
+            var characters = sourceStream(' sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Space)).toBe(true);
+        });
+
+        it('should return a space token when stream cursor points to two spaces', function() {
+            var characters = sourceStream('  sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Space)).toBe(true);
+        });
+
+        it('should return a space token when stream cursor points to three spaces', function() {
+            var characters = sourceStream('   sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Space)).toBe(true);
+        });
+
+        it('should return an indent token when stream cursor points to four spaces', function() {
+            var characters = sourceStream('    sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Indent)).toBe(true);
+        });
+
+        it('should only parse up to four spaces at once', function() {
+            var characters = sourceStream('     ');
+            var token = tokenize(characters);
+            expect(characters.current).toBe(' ');
+        });
+    });
 });

@@ -42,6 +42,19 @@ katasemeion.lexer = (function(tokens) {
     self.tokenizeAsterisk = ifCharIs('*').
                             thenReturn(tokens.Asterisk).
                             elifDoubledReturn(tokens.DoubleAsterisk);
+    self.tokenizeSpaces = function(sourceStream) {
+        if (sourceStream.current === ' ') {
+            sourceStream.advanceCursor();
+            for (var i = 2; i <= 4; i++) {
+                if (sourceStream.current !== ' ') {
+                    return tokens.Space();
+                }
+                sourceStream.advanceCursor();
+            }
+            return tokens.Indent();
+        }
+        return null;
+    };
 
     return self;
 })(katasemeion.tokens);
