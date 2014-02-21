@@ -6,7 +6,7 @@ translated *mark*. This is not to say that this is the actual Greek word for
 Markdown.
 
 I have just begun this project. While in college, I create a mashup of scripts
-that I used to convert a easy-to-write XMML format into HTML or LaTeX so I
+that I used to convert a easy-to-write XML format into HTML or LaTeX so I
 could pretty-print my translations of Biblical books without having to use a
 WYSIWIG editor. I prefer to live in my native habitat, Vim.
 
