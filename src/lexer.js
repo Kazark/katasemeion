@@ -2,12 +2,13 @@ katasemeion.lexer = (function(tokens) {
     var self = this;
 
     var ifCharIs = function(character) {
-        var thenReturn = function(thenToken) {
+        var me = {};
+        var mkTokenizer = function(thenFunction) {
             var _elseToken = function() { return null; };
             var tokenize = function(sourceStream) {
                 if (sourceStream.current === character) {
                     sourceStream.advanceCursor();
-                    return thenToken();
+                    return thenFunction(sourceStream);
                 }
                 return _elseToken();
             };
@@ -23,7 +24,7 @@ katasemeion.lexer = (function(tokens) {
                                    thenReturn(function() {
                                        return ifCharIs(alternateChar).
                                               thenReturn(alternateToken).
-                                              elseReturn(thenToken)(sourceStream);
+                                              elseReturn(thenFunction)(sourceStream);
                                    })(sourceStream);
                         };
                     }
@@ -35,9 +36,15 @@ katasemeion.lexer = (function(tokens) {
             };
             return tokenize;
         };
-        return {
-            thenReturn: thenReturn
+        me.then = function(subtokenizer) {
+            return mkTokenizer(subtokenizer);
         };
+        me.thenReturn = function(thenFunction) {
+            return mkTokenizer(function() {
+                return thenFunction();
+            });
+        };
+        return me;
     };
 
     self.tokenizeOpenBracket = ifCharIs('[').

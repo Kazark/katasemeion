@@ -19,6 +19,11 @@ describe('Κατασημεῖον tokens module', function() {
                 expect(token).toBeTruthy();
             });
 
+            it('should be be marked as a token type', function() {
+                var token = makeTokenType(1);
+                expect(token.isTokenType).toBe(true);
+            });
+
             describe('a token', function() {
                 it('should know its type', function() {
                     var tokenType = makeTokenType(1);

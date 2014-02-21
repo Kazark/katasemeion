@@ -12,6 +12,7 @@ katasemeion.tokens = (function() {
         makeToken.typeIs = function(x) {
             return typeCode === x;
         };
+        makeToken.isTokenType = true;
         return makeToken;
     };
 
