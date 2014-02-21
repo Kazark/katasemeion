@@ -19,14 +19,10 @@ katasemeion.lexer = (function(tokens) {
             tokenize.unlessFollowedBy = function(alternateChar) {
                 return {
                     thenReturn: function(alternateToken) {
-                        return function(sourceStream) {
-                            return ifCharIs(character).
-                                   thenReturn(function() {
-                                       return ifCharIs(alternateChar).
-                                              thenReturn(alternateToken).
-                                              elseReturn(thenFunction)(sourceStream);
-                                   })(sourceStream);
-                        };
+                        return ifCharIs(character).
+                               then(ifCharIs(alternateChar).
+                                    thenReturn(alternateToken).
+                                    elseReturn(thenFunction));
                     }
                 };
             };
@@ -65,18 +61,16 @@ katasemeion.lexer = (function(tokens) {
     self.tokenizeCloseBrace = ifCharIs('}').
                               thenReturn(tokens.CloseBrace);
 
-    self.tokenizeSpaces = function(sourceStream) {
-        return ifCharIs(' ').
-               thenReturn(function() {
-                   for (var i = 2; i <= 4; i++) {
-                       if (sourceStream.current !== ' ') {
-                           return tokens.Space();
-                       }
-                       sourceStream.advanceCursor();
-                   }
-                   return tokens.Indent();
-               })(sourceStream);
-    };
+    self.tokenizeSpaces = ifCharIs(' ').
+                          then(function(sourceStream) {
+                              for (var i = 2; i <= 4; i++) {
+                                  if (sourceStream.current !== ' ') {
+                                      return tokens.Space();
+                                  }
+                                  sourceStream.advanceCursor();
+                              }
+                              return tokens.Indent();
+                          });
 
     return self;
 })(katasemeion.tokens);
