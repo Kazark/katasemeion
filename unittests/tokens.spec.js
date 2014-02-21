@@ -57,6 +57,18 @@ describe('Κατασημεῖον tokens module', function() {
             expect(isTokenType(tokens.DoubleCloseBracket)).toBe(true);
         });
 
+        it('should include "at"', function() {
+            expect(isTokenType(tokens.At)).toBe(true);
+        });
+
+        it('should include an "at" with open brace combination', function() {
+            expect(isTokenType(tokens.AtWithOpenBrace)).toBe(true);
+        });
+
+        it('should include a close brace', function() {
+            expect(isTokenType(tokens.CloseBrace)).toBe(true);
+        });
+
         it('should include asterisk', function() {
             expect(isTokenType(tokens.Asterisk)).toBe(true);
         });

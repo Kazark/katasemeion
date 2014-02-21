@@ -24,6 +24,9 @@ katasemeion.tokens = (function() {
     self.Underscore = self.makeTokenType(200);
     self.Asterisk = self.makeTokenType(310);
     self.DoubleAsterisk = self.makeTokenType(320);
+    self.At = self.makeTokenType(410);
+    self.AtWithOpenBrace = self.makeTokenType(411);
+    self.CloseBrace = self.makeTokenType(490);
 
     return self;
 })();

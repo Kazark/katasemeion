@@ -106,6 +106,49 @@ describe('Κατασημεῖον lexer', function() {
         });
     });
 
+    describe('"at" tokenizer', function() {
+        var tokenize =  lexer.tokenizeAt;
+
+        it('should do nothing if there is no "at" at the beginning of the stream', function() {
+            var characters = sourceStream('a@df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return an "at" token when stream cursor points to an "at" with no open brace', function() {
+            var characters = sourceStream('@sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.At)).toBe(true);
+        });
+
+        it('should return an "at with open brace" token when stream cursor points to that combination', function() {
+            var characters = sourceStream('@{df');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
+            expect(token.is(tokens.AtWithOpenBrace)).toBe(true);
+        });
+    });
+
+    describe('close brace tokenizer', function() {
+        var tokenize =  lexer.tokenizeCloseBrace;
+
+        it('should do nothing if there is no close brace at the beginning of the stream', function() {
+            var characters = sourceStream('a}df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a close brace token when stream cursor points to a close brace', function() {
+            var characters = sourceStream('}sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.CloseBrace)).toBe(true);
+        });
+    });
+
     describe('underscore tokenizer', function() {
         var tokenize =  lexer.tokenizeUnderscore;
 
@@ -117,14 +160,10 @@ describe('Κατασημεῖον lexer', function() {
         });
 
         it('should return an underscore token when stream cursor points to an underscore', function() {
-            var token = tokenize(sourceStream('_sdf'));
-            expect(token.is(tokens.Underscore)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed a token', function() {
             var characters = sourceStream('_sdf');
             var token = tokenize(characters);
             expect(characters.current).toBe('s');
+            expect(token.is(tokens.Underscore)).toBe(true);
         });
     });
 

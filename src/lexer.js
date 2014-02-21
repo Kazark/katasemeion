@@ -4,27 +4,35 @@ katasemeion.lexer = (function(tokens) {
     var ifCharIs = function(character) {
         return {
             thenReturn: function(thenToken) {
-                var _elseToken;
+                var _elseToken = function() { return null; };
                 var tokenize = function(sourceStream) {
                     if (sourceStream.current === character) {
                         sourceStream.advanceCursor();
                         return thenToken();
                     }
-                    return _elseToken ? _elseToken() : null;
+                    return _elseToken();
                 };
                 tokenize.elseReturn = function(elseToken) {
                     _elseToken = elseToken;
                     return tokenize;
                 };
-                tokenize.elifDoubledReturn = function(doubledToken) {
-                    return function(sourceStream) {
-                        return ifCharIs(character).
-                               thenReturn(function() {
-                                   return ifCharIs(character).
-                                          thenReturn(doubledToken).
-                                          elseReturn(thenToken)(sourceStream);
-                               })(sourceStream);
+                tokenize.unlessFollowedBy = function(alternateChar) {
+                    return {
+                        thenReturn: function(alternateToken) {
+                            return function(sourceStream) {
+                                return ifCharIs(character).
+                                       thenReturn(function() {
+                                           return ifCharIs(alternateChar).
+                                                  thenReturn(alternateToken).
+                                                  elseReturn(thenToken)(sourceStream);
+                                       })(sourceStream);
+                            };
+                        }
                     };
+                };
+                tokenize.elifDoubledReturn = function(doubledToken) {
+                    return tokenize.unlessFollowedBy(character)
+                                   .thenReturn(doubledToken);
                 };
                 return tokenize;
             }
@@ -42,6 +50,13 @@ katasemeion.lexer = (function(tokens) {
     self.tokenizeAsterisk = ifCharIs('*').
                             thenReturn(tokens.Asterisk).
                             elifDoubledReturn(tokens.DoubleAsterisk);
+    self.tokenizeAt = ifCharIs('@').
+                      thenReturn(tokens.At).
+                      unlessFollowedBy('{').
+                      thenReturn(tokens.AtWithOpenBrace);
+    self.tokenizeCloseBrace = ifCharIs('}').
+                              thenReturn(tokens.CloseBrace);
+
     self.tokenizeSpaces = function(sourceStream) {
         if (sourceStream.current === ' ') {
             sourceStream.advanceCursor();
