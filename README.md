@@ -36,8 +36,8 @@ Light, but [he had come] so that he might witness about the Light.` You can mark
 a section as being left out in some manuscripts by using double square brackets:
 `the one coming from heaven [[is above all]]`.
 
-You can insert automatic chapter numbers with `$$` and verse numbers with `$`.
-You can explicitly specify chapter numbers explicitly like `$${4}` and verse
+You can insert automatic chapter numbers with `%` and verse numbers with `$`.
+You can explicitly specify chapter numbers explicitly like `%{4}` and verse
 numbers explicitly with the corresponding notation: `${8a}`.
 
 You can format verse by using indenting that is typically used for code in

@@ -38,7 +38,7 @@ describe('Κατασημεῖον tokens module', function() {
 
     describe('token types', function() {
         var isTokenType = function(x) {
-            return typeof(x.typeIs) === "function";
+            return typeof x.typeIs === "function";
         };
 
         it('should include open square bracket', function() {
