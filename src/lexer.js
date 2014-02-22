@@ -49,6 +49,10 @@ katasemeion.lexer = (function(tokens) {
     self.tokenizeCloseBracket = ifCharIs(']').
                                 thenReturn(tokens.CloseBracket).
                                 elifDoubledReturn(tokens.DoubleCloseBracket);
+    self.tokenizeOpenAngle = ifCharIs('<').
+                             thenReturn(tokens.OpenAngle);
+    self.tokenizeCloseAngle = ifCharIs('>').
+                              thenReturn(tokens.CloseAngle);
     self.tokenizeUnderscore = ifCharIs('_').
                               thenReturn(tokens.Underscore);
     self.tokenizeAsterisk = ifCharIs('*').

@@ -148,6 +148,42 @@ describe('Κατασημεῖον lexer', function() {
         });
     });
 
+    describe('open angle bracket tokenizer', function() {
+        var tokenize =  lexer.tokenizeOpenAngle;
+
+        it('should do nothing if there is no open angle bracket at the beginning of the stream', function() {
+            var characters = sourceStream('a<df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a open angle bracket token when stream is at a open angle bracket', function() {
+            var characters = sourceStream('<sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.OpenAngle)).toBe(true);
+        });
+    });
+
+    describe('close angle bracket tokenizer', function() {
+        var tokenize =  lexer.tokenizeCloseAngle;
+
+        it('should do nothing if there is no close angle bracket at the beginning of the stream', function() {
+            var characters = sourceStream('a>df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a close angle bracket token when stream is at a close angle bracket', function() {
+            var characters = sourceStream('>sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.CloseAngle)).toBe(true);
+        });
+    });
+
     describe('close brace tokenizer', function() {
         var tokenize =  lexer.tokenizeCloseBrace;
 

@@ -41,31 +41,39 @@ describe('Κατασημεῖον tokens module', function() {
             return typeof(x.typeIs) === "function";
         };
 
-        it('should include open bracket', function() {
+        it('should include open square bracket', function() {
             expect(isTokenType(tokens.OpenBracket)).toBe(true);
         });
 
-        it('should include double open bracket', function() {
+        it('should include double open square bracket', function() {
             expect(isTokenType(tokens.DoubleOpenBracket)).toBe(true);
         });
 
-        it('should include close bracket', function() {
+        it('should include close square bracket', function() {
             expect(isTokenType(tokens.CloseBracket)).toBe(true);
         });
 
-        it('should include double close bracket', function() {
+        it('should include double close square bracket', function() {
             expect(isTokenType(tokens.DoubleCloseBracket)).toBe(true);
+        });
+
+        it('should include open angle bracket', function() {
+            expect(isTokenType(tokens.OpenAngle)).toBe(true);
+        });
+
+        it('should include close angle bracket', function() {
+            expect(isTokenType(tokens.CloseAngle)).toBe(true);
         });
 
         it('should include "at"', function() {
             expect(isTokenType(tokens.At)).toBe(true);
         });
 
-        it('should include an "at" with open brace combination', function() {
+        it('should include an "at" with open curly brace combination', function() {
             expect(isTokenType(tokens.AtWithOpenBrace)).toBe(true);
         });
 
-        it('should include a close brace', function() {
+        it('should include a close curly brace', function() {
             expect(isTokenType(tokens.CloseBrace)).toBe(true);
         });
 
