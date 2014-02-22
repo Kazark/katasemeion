@@ -31,6 +31,7 @@ katasemeion.tokens = (function() {
     self.At = self.makeTokenType(410);
     self.AtWithOpenBrace = self.makeTokenType(411);
     self.CloseBrace = self.makeTokenType(490);
+    self.Hash = self.makeTokenType(500);
 
     return self;
 })();

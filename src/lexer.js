@@ -78,6 +78,8 @@ katasemeion.lexer = (function(tokens) {
     self.tokenizeNewline = ifCharIs('\n').
                            thenReturn(tokens.Newline).
                            elifDoubledReturn(tokens.DoubleNewline);
+    self.tokenizeHash = ifCharIs('#').
+                        thenReturn(tokens.Hash);
 
     return self;
 })(katasemeion.tokens);

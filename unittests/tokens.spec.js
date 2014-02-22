@@ -104,5 +104,9 @@ describe('Κατασημεῖον tokens module', function() {
         it('should include underscore', function() {
             expect(isTokenType(tokens.Underscore)).toBe(true);
         });
+
+        it('should include hash', function() {
+            expect(isTokenType(tokens.Hash)).toBe(true);
+        });
     });
 });

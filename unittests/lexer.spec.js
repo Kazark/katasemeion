@@ -18,25 +18,17 @@ describe('Κατασημεῖον lexer', function() {
         });
 
         it('should return an open bracket token when stream cursor points to an open bracket', function() {
-            var token = tokenize(sourceStream('[sdf'));
-            expect(token.is(tokens.OpenBracket)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed an open bracket token', function() {
             var characters = sourceStream('[sdf');
             var token = tokenize(characters);
             expect(characters.current).toBe('s');
+            expect(token.is(tokens.OpenBracket)).toBe(true);
         });
 
         it('should return a double open bracket token when stream is at two open brackets', function() {
-            var token = tokenize(sourceStream('[[df'));
-            expect(token.is(tokens.DoubleOpenBracket)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed a double open bracket token', function() {
             var characters = sourceStream('[[df');
             var token = tokenize(characters);
             expect(characters.current).toBe('d');
+            expect(token.is(tokens.DoubleOpenBracket)).toBe(true);
         });
     });
 
@@ -51,25 +43,17 @@ describe('Κατασημεῖον lexer', function() {
         });
 
         it('should return a close bracket token when stream cursor points to a close bracket', function() {
-            var token = tokenize(sourceStream(']sdf'));
-            expect(token.is(tokens.CloseBracket)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed a close bracket token', function() {
             var characters = sourceStream(']sdf');
             var token = tokenize(characters);
             expect(characters.current).toBe('s');
+            expect(token.is(tokens.CloseBracket)).toBe(true);
         });
 
         it('should return a double close bracket token when stream is at two close brackets', function() {
-            var token = tokenize(sourceStream(']]df'));
-            expect(token.is(tokens.DoubleCloseBracket)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed a double close bracket token', function() {
             var characters = sourceStream(']]df');
             var token = tokenize(characters);
             expect(characters.current).toBe('d');
+            expect(token.is(tokens.DoubleCloseBracket)).toBe(true);
         });
     });
 
@@ -262,6 +246,24 @@ describe('Κατασημεῖον lexer', function() {
             var characters = sourceStream('     ');
             var token = tokenize(characters);
             expect(characters.current).toBe(' ');
+        });
+    });
+
+    describe('hash tokenizer', function() {
+        var tokenize =  lexer.tokenizeHash;
+
+        it('should do nothing if there is no hash at the beginning of the stream', function() {
+            var characters = sourceStream('a#df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a hash token when stream cursor points to a hash with no following v or c', function() {
+            var characters = sourceStream('#sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Hash)).toBe(true);
         });
     });
 });
