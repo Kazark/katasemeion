@@ -65,11 +65,11 @@ describe('Κατασημεῖον tokens module', function() {
             expect(isTokenType(tokens.CloseAngle)).toBe(true);
         });
 
-        it('should include "at"', function() {
+        it('should include "at" sign', function() {
             expect(isTokenType(tokens.At)).toBe(true);
         });
 
-        it('should include an "at" with open curly brace combination', function() {
+        it('should include an "at" sign with open curly brace combination', function() {
             expect(isTokenType(tokens.AtWithOpenBrace)).toBe(true);
         });
 
@@ -107,6 +107,22 @@ describe('Κατασημεῖον tokens module', function() {
 
         it('should include hash', function() {
             expect(isTokenType(tokens.Hash)).toBe(true);
+        });
+
+        it('should include dollar sign', function() {
+            expect(isTokenType(tokens.Dollar)).toBe(true);
+        });
+
+        it('should include dollar sign with an open curly brace combination', function() {
+            expect(isTokenType(tokens.DollarWithOpenBrace)).toBe(true);
+        });
+
+        it('should include percent sign', function() {
+            expect(isTokenType(tokens.Percent)).toBe(true);
+        });
+
+        it('should include percent sign with an open curly brace combination', function() {
+            expect(isTokenType(tokens.PercentWithOpenBrace)).toBe(true);
         });
     });
 });

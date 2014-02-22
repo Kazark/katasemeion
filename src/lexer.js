@@ -62,6 +62,14 @@ katasemeion.lexer = (function(tokens) {
                       thenReturn(tokens.At).
                       unlessFollowedBy('{').
                       thenReturn(tokens.AtWithOpenBrace);
+    self.tokenizePercent = ifCharIs('%').
+                           thenReturn(tokens.Percent).
+                           unlessFollowedBy('{').
+                           thenReturn(tokens.PercentWithOpenBrace);
+    self.tokenizeDollar = ifCharIs('$').
+                          thenReturn(tokens.Dollar).
+                          unlessFollowedBy('{').
+                          thenReturn(tokens.DollarWithOpenBrace);
     self.tokenizeCloseBrace = ifCharIs('}').
                               thenReturn(tokens.CloseBrace);
 

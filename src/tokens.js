@@ -30,6 +30,10 @@ katasemeion.tokens = (function() {
     self.DoubleAsterisk = self.makeTokenType(320);
     self.At = self.makeTokenType(410);
     self.AtWithOpenBrace = self.makeTokenType(411);
+    self.Dollar = self.makeTokenType(420);
+    self.DollarWithOpenBrace = self.makeTokenType(421);
+    self.Percent = self.makeTokenType(430);
+    self.PercentWithOpenBrace = self.makeTokenType(431);
     self.CloseBrace = self.makeTokenType(490);
     self.Hash = self.makeTokenType(500);
 

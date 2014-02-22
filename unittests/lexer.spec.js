@@ -266,4 +266,54 @@ describe('Κατασημεῖον lexer', function() {
             expect(token.is(tokens.Hash)).toBe(true);
         });
     });
+
+    describe('percent sign tokenizer', function() {
+        var tokenize =  lexer.tokenizePercent;
+
+        it('should do nothing if there is no percent sign at the beginning of the stream', function() {
+            var characters = sourceStream('a%df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a percent sign token when stream is at a percent sign with no open brace', function() {
+            var characters = sourceStream('%sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Percent)).toBe(true);
+        });
+
+        it('should return a "percent sign with open brace" token when stream is at that combination', function() {
+            var characters = sourceStream('%{df');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
+            expect(token.is(tokens.PercentWithOpenBrace)).toBe(true);
+        });
+    });
+
+    describe('dollar sign tokenizer', function() {
+        var tokenize =  lexer.tokenizeDollar;
+
+        it('should do nothing if there is no dollar sign at the beginning of the stream', function() {
+            var characters = sourceStream('a$df');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a dollar sign token when stream is at a dollar sign with no open brace', function() {
+            var characters = sourceStream('$sdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Dollar)).toBe(true);
+        });
+
+        it('should return a "dollar sign with open brace" token when stream is at that combination', function() {
+            var characters = sourceStream('${df');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
+            expect(token.is(tokens.DollarWithOpenBrace)).toBe(true);
+        });
+    });
 });
