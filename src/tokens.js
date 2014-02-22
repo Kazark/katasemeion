@@ -17,6 +17,8 @@ katasemeion.tokens = (function() {
 
     self.Space = self.makeTokenType(10);
     self.Indent = self.makeTokenType(11);
+    self.Newline = self.makeTokenType(12);
+    self.DoubleNewline = self.makeTokenType(13);
     self.OpenBracket = self.makeTokenType(110);
     self.CloseBracket = self.makeTokenType(111);
     self.DoubleOpenBracket = self.makeTokenType(120);

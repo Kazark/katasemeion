@@ -84,25 +84,42 @@ describe('Κατασημεῖον lexer', function() {
         });
 
         it('should return an asterisk token when stream cursor points to an asterisk', function() {
-            var token = tokenize(sourceStream('*sdf'));
-            expect(token.is(tokens.Asterisk)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed an asterisk token', function() {
             var characters = sourceStream('*sdf');
             var token = tokenize(characters);
             expect(characters.current).toBe('s');
+            expect(token.is(tokens.Asterisk)).toBe(true);
         });
 
-        it('should return a double asterisk token when stream is at two asterisk', function() {
-            var token = tokenize(sourceStream('**df'));
-            expect(token.is(tokens.DoubleAsterisk)).toBe(true);
-        });
-
-        it('should advance the cursor when it has parsed a double asterisk token', function() {
+        it('should return a double asterisk token when stream is at two asterisks', function() {
             var characters = sourceStream('**df');
             var token = tokenize(characters);
             expect(characters.current).toBe('d');
+            expect(token.is(tokens.DoubleAsterisk)).toBe(true);
+        });
+    });
+
+    describe('newline tokenizer', function() {
+        var tokenize =  lexer.tokenizeNewline;
+
+        it('should do nothing if there is no newline at the beginning of the stream', function() {
+            var characters = sourceStream('a\ndf');
+            var token = tokenize(characters);
+            expect(token).toBeFalsy();
+            expect(characters.current).toBe('a');
+        });
+
+        it('should return a newline token when stream cursor points to a newline', function() {
+            var characters = sourceStream('\nsdf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('s');
+            expect(token.is(tokens.Newline)).toBe(true);
+        });
+
+        it('should return a double newline token when stream is at two newlines', function() {
+            var characters = sourceStream('\n\ndf');
+            var token = tokenize(characters);
+            expect(characters.current).toBe('d');
+            expect(token.is(tokens.DoubleNewline)).toBe(true);
         });
     });
 

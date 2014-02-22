@@ -81,6 +81,14 @@ describe('Κατασημεῖον tokens module', function() {
             expect(isTokenType(tokens.Space)).toBe(true);
         });
 
+        it('should include newline', function() {
+            expect(isTokenType(tokens.Newline)).toBe(true);
+        });
+
+        it('should include double newline', function() {
+            expect(isTokenType(tokens.DoubleNewline)).toBe(true);
+        });
+
         it('should include indent', function() {
             expect(isTokenType(tokens.Indent)).toBe(true);
         });

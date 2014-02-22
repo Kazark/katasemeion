@@ -71,6 +71,9 @@ katasemeion.lexer = (function(tokens) {
                               }
                               return tokens.Indent();
                           });
+    self.tokenizeNewline = ifCharIs('\n').
+                           thenReturn(tokens.Newline).
+                           elifDoubledReturn(tokens.DoubleNewline);
 
     return self;
 })(katasemeion.tokens);
