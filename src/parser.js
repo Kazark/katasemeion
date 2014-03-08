@@ -1,5 +1,5 @@
 katasemeion.parser = (function() {
-    var self = this;
+    var self = {};
     self.parse = function(inputText) {
         var output = {
             paragraphs: {}

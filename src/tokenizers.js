@@ -1,5 +1,5 @@
 katasemeion.tokenizers = (function(tokens) {
-    var self = this;
+    var self = {};
 
     var ifCharIs = function(character) {
         var me = {};

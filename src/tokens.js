@@ -1,5 +1,5 @@
 katasemeion.tokens = (function() {
-    var self = this;
+    var self = {};
 
     self.makeTokenType = function(typeCode) {
         var makeToken = function() {

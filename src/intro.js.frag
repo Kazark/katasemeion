@@ -1,2 +1,3 @@
 var katasemeion = (function() {
-    var katasemeion = this;
+    "use strict";
+    var katasemeion = {};
