@@ -17,7 +17,7 @@ describe('Κατασημεῖον lexer', function() {
                 jasmine.createSpy('tokenizer2')
             ];
             tokenOutputCallback = jasmine.createSpy('tokenOutputCallback');
-            lexer = katasemeion.make.lexer({ all : fakeTokenizers }, tokenOutputCallback);
+            lexer = katasemeion.make.lexer(katasemeion.tokens, { all : fakeTokenizers }, tokenOutputCallback);
             stream = katasemeion.sourceStream("a");
         });
 
@@ -28,10 +28,12 @@ describe('Κατασημεῖον lexer', function() {
             expect(fakeTokenizers[1]).toHaveBeenCalledWith(stream);
         });
 
-        it('should not pass return value of tokenizers to the callback function if it is null', function() {
+        it('should not pass return value of tokenizers to the callback function if it is falsy', function() {
             lexer.lex(stream);
 
-            expect(tokenOutputCallback).not.toHaveBeenCalled();
+            expect(tokenOutputCallback).not.toHaveBeenCalledWith(null);
+            expect(tokenOutputCallback).not.toHaveBeenCalledWith(undefined);
+            expect(tokenOutputCallback.calls.count()).toEqual(1);
         });
 
         it('should pass parsed tokens to the callback function', function() {
@@ -40,6 +42,17 @@ describe('Κατασημεῖον lexer', function() {
             lexer.lex(stream);
 
             expect(tokenOutputCallback).toHaveBeenCalledWith(tokens.Hash);
+        });
+
+        describe('if none of the tokenizers recognize the character', function() {
+            it('should pass a character token to the callback function with the character', function() {
+                lexer.lex(stream);
+
+                var token = tokenOutputCallback.calls.mostRecent().args[0];
+                expect(token.is(tokens.Character)).toBe(true);
+                expect(token.data).toBe('a');
+
+            });
         });
     });
 });
