@@ -37,7 +37,7 @@ describe('Κατασημεῖον lexer', function() {
         });
 
         it('should pass parsed tokens to the callback function', function() {
-            fakeTokenizers.push(function() { return tokens.Hash; });
+            fakeTokenizers.push(function(ss) { ss.advanceCursor(); return tokens.Hash; });
 
             lexer.lex(stream);
 
@@ -58,6 +58,15 @@ describe('Κατασημεῖον lexer', function() {
 
                 expect(stream.pastEnd).toBe(true);
             });
+        });
+
+        it('should run until there are no more tokens in the source stream', function() {
+            stream = katasemeion.sourceStream("asdf");
+
+            lexer.lex(stream);
+
+            expect(tokenOutputCallback.calls.count()).toEqual(4);
+            expect(stream.pastEnd).toBe(true);
         });
     });
 });

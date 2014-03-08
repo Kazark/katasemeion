@@ -3,7 +3,10 @@ katasemeion.make.lexer = function(tokens, tokenizers, callback) {
     self.tokenizers = tokenizers;
     self.lex = function(sourceStream) {
         var unrecognizedCount = 0;
-        tokenizers.all.forEach(function(tokenize) {
+        var i = 0;
+        while (!sourceStream.pastEnd)
+        {
+            var tokenize = tokenizers.all[i];
             var token = tokenize(sourceStream);
             if (token) {
                 unrecognizedCount = 0;
@@ -11,13 +14,18 @@ katasemeion.make.lexer = function(tokens, tokenizers, callback) {
             } else {
                 unrecognizedCount++;
             }
-            if (unrecognizedCount >= tokenizers.all.length) {
+            if (unrecognizedCount === tokenizers.all.length) {
                 token = tokens.Character();
                 token.data = sourceStream.current;
                 callback(token);
                 sourceStream.advanceCursor();
+                unrecognizedCount = 0;
             }
-        });
+            i++;
+            if (i === tokenizers.all.length) {
+                i = 0;
+            }
+        }
     };
     return self;
 };
