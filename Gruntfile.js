@@ -12,6 +12,7 @@ module.exports = function(grunt) {
                     'src/intro.js.frag',
                     'src/sourceStream.js',
                     'src/tokens.js',
+                    'src/tokenizers.js',
                     'src/lexer.js',
                     'src/parser.js',
                     'src/outro.js.frag'
@@ -20,7 +21,7 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: ['src/*.js*', 'unittests/*.spec.js'],
+                files: ['Gruntfile.js', 'src/*.js*', 'unittests/*.spec.js'],
                 tasks: ['unittests']
             }
         },
