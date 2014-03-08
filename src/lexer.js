@@ -1,4 +1,4 @@
-katasemeion.lexer = (function(tokenizers) {
+katasemeion.make.lexer = function(tokenizers) {
     var self = {};
     self.tokenizers = tokenizers;
     self.lex = function() {
@@ -7,4 +7,7 @@ katasemeion.lexer = (function(tokenizers) {
         });
     };
     return self;
-})(katasemeion.tokenizers);
+};
+
+katasemeion.lexer = katasemeion.make.lexer(katasemeion.tokenizers);
+
