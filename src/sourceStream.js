@@ -2,12 +2,12 @@ katasemeion.sourceStream = function(sourceString) {
     var cursor = 0;
     var stream = {
         current : sourceString[cursor],
-        pastEnd : true,
+        pastEnd : false,
     };
     stream.advanceCursor = function() {
         cursor++;
         if (cursor >= sourceString.length) {
-            stream.pastEnd = false;
+            stream.pastEnd = true;
             stream.current = null;
         } else {
             stream.current = sourceString[cursor];

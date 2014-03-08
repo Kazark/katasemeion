@@ -11,7 +11,7 @@ describe('Κατασημεῖον source text stream', function() {
     });
 
     it('should know when it has not pasted the end', function() {
-        expect(characters.pastEnd).toBe(true);
+        expect(characters.pastEnd).toBe(false);
     });
 
     it('should provide a way to advance the cursor', function() {
@@ -26,7 +26,7 @@ describe('Κατασημεῖον source text stream', function() {
         characters.advanceCursor();
         characters.advanceCursor();
         characters.advanceCursor();
-        expect(characters.pastEnd).toBe(false);
+        expect(characters.pastEnd).toBe(true);
     });
 
     it('should set the current character to null when advanced past the end', function() {
