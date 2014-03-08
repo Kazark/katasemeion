@@ -36,6 +36,7 @@ katasemeion.tokens = (function() {
     self.PercentWithOpenBrace = self.makeTokenType(431);
     self.CloseBrace = self.makeTokenType(490);
     self.Hash = self.makeTokenType(500);
+    self.Character = self.makeTokenType(999);
 
     return self;
 })();

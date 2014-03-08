@@ -124,5 +124,9 @@ describe('Κατασημεῖον tokens module', function() {
         it('should include percent sign with an open curly brace combination', function() {
             expect(isTokenType(tokens.PercentWithOpenBrace)).toBe(true);
         });
+
+        it('should include plain text character', function() {
+            expect(isTokenType(tokens.Character)).toBe(true);
+        });
     });
 });
