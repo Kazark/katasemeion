@@ -51,7 +51,12 @@ describe('Κατασημεῖον lexer', function() {
                 var token = tokenOutputCallback.calls.mostRecent().args[0];
                 expect(token.is(tokens.Character)).toBe(true);
                 expect(token.data).toBe('a');
+            });
 
+            it('should advance the cursor of the source stream', function() {
+                lexer.lex(stream);
+
+                expect(stream.pastEnd).toBe(true);
             });
         });
     });
