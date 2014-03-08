@@ -1,10 +1,15 @@
-describe('Κατασημεῖον tokenizers', function() {
+describe('Κατασημεῖον tokenizers module', function() {
     var tokenizers = katasemeion.tokenizers;
     var tokens = katasemeion.tokens;
     var sourceStream = katasemeion.sourceStream;
 
     it('should exist', function() {
         expect(tokenizers).toBeTruthy();
+    });
+
+    it('should have a list of all the tokenizers', function() {
+        expect(tokenizers.all).toBeTruthy();
+        expect(tokenizers.all.length).toBe(13);
     });
 
     describe('open bracket tokenizer', function() {

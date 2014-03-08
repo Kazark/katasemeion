@@ -89,5 +89,18 @@ katasemeion.tokenizers = (function(tokens) {
     self.tokenizeHash = ifCharIs('#').
                         thenReturn(tokens.Hash);
 
+    self.all = [ self.tokenizeOpenBracket, self.tokenizeCloseBracket,
+                 self.tokenizeOpenAngle, self.tokenizeCloseAngle,
+                 self.tokenizeUnderscore,
+                 self.tokenizeAsterisk,
+                 self.tokenizeAt,
+                 self.tokenizePercent,
+                 self.tokenizeDollar,
+                 self.tokenizeCloseBrace,
+                 self.tokenizeSpaces,
+                 self.tokenizeNewline,
+                 self.tokenizeHash
+               ];
+
     return self;
 })(katasemeion.tokens);
