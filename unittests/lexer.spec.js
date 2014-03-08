@@ -9,12 +9,13 @@ describe('Κατασημεῖον lexer', function() {
             jasmine.createSpy('tokenizer2')
         ];
         var lexer = katasemeion.make.lexer({ all : fakeTokenizers });
+        var stream = katasemeion.sourceStream("a");
 
         it('should invoke each of the tokenizers in turn', function() {
-            lexer.lex();
+            lexer.lex(stream);
 
-            expect(fakeTokenizers[0]).toHaveBeenCalled();
-            expect(fakeTokenizers[1]).toHaveBeenCalled();
+            expect(fakeTokenizers[0]).toHaveBeenCalledWith(stream);
+            expect(fakeTokenizers[1]).toHaveBeenCalledWith(stream);
         });
     });
 });

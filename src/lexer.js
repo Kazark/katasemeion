@@ -1,9 +1,9 @@
 katasemeion.make.lexer = function(tokenizers) {
     var self = {};
     self.tokenizers = tokenizers;
-    self.lex = function() {
+    self.lex = function(sourceStream) {
         tokenizers.all.forEach(function(tokenize) {
-            tokenize();
+            tokenize(sourceStream);
         });
     };
     return self;
