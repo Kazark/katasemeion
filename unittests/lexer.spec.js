@@ -5,7 +5,7 @@ describe('Κατασημεῖον lexer', function() {
         expect(katasemeion.lexer).toBeTruthy();
     });
 
-    describe('lex', function() {
+    describe('lex()', function() {
         var fakeTokenizers,
             tokenOutputCallback,
             lexer,

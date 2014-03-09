@@ -6,8 +6,7 @@ katasemeion.make.lexer = function(tokens, tokenizers, callback) {
         var i = 0;
         while (!sourceStream.pastEnd)
         {
-            var tokenize = tokenizers.all[i];
-            var token = tokenize(sourceStream);
+            var token = tokenizers.all[i](sourceStream);
             if (token) {
                 unrecognizedCount = 0;
                 callback(token);
