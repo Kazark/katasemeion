@@ -10,5 +10,14 @@ katasemeion.output.html = function(outFunction) {
         };
         return elem;
     };
+
+    self.elementList = {
+        html: self.element('html'),
+        body: self.element('body')
+    };
+
+    self.generateHeader = function() {
+    };
+
     return self;
 };

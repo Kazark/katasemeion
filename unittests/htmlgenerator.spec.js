@@ -23,4 +23,19 @@ describe('HTML generator', function() {
             expect(logSpy).toHaveBeenCalledWith('</html>');
         });
     });
+
+    describe('element list', function() {
+        function isElement(object) {
+            return object && typeof object.closeTag === 'function' && typeof object.openTag === 'function';
+        }
+
+        it('should contain a top-level <html> element', function() {
+            expect(isElement(htmlgenerator.elementList.html)).toBe(true);
+        });
+
+        it('should contain a top-level <html> element', function() {
+            expect(isElement(htmlgenerator.elementList.body)).toBe(true);
+        });
+    });
 });
+
