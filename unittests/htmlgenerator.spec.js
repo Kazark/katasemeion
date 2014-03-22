@@ -33,8 +33,16 @@ describe('HTML generator', function() {
             expect(isElement(htmlgenerator.elementList.html)).toBe(true);
         });
 
-        it('should contain a top-level <html> element', function() {
+        it('should contain a <head> element', function() {
+            expect(isElement(htmlgenerator.elementList.head)).toBe(true);
+        });
+
+        it('should contain a <body> element', function() {
             expect(isElement(htmlgenerator.elementList.body)).toBe(true);
+        });
+
+        it('should contain a <p> paragraph element', function() {
+            expect(isElement(htmlgenerator.elementList.p)).toBe(true);
         });
     });
 });

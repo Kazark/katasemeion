@@ -13,7 +13,9 @@ katasemeion.output.html = function(outFunction) {
 
     self.elementList = {
         html: self.element('html'),
-        body: self.element('body')
+        head: self.element('head'),
+        body: self.element('body'),
+        p: self.element('p')
     };
 
     self.generateHeader = function() {
