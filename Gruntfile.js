@@ -15,6 +15,7 @@ module.exports = function(grunt) {
                     'src/tokenizers.js',
                     'src/lexer.js',
                     'src/parser.js',
+                    'src/htmlgenerator.js',
                     'src/outro.js.frag'
                 ]
             }
