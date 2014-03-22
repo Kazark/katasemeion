@@ -5,6 +5,9 @@ katasemeion.output.html = function(outFunction) {
         elem.openTag = function() {
             outFunction('<' + tagName + '>');
         };
+        elem.closeTag = function() {
+            outFunction('</' + tagName + '>');
+        };
         return elem;
     };
     return self;

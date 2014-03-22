@@ -16,5 +16,11 @@ describe('HTML generator', function() {
             element.openTag();
             expect(logSpy).toHaveBeenCalledWith('<html>');
         });
+
+        it('should know how to generate a close tag', function() {
+            var element = htmlgenerator.element('html');
+            element.closeTag();
+            expect(logSpy).toHaveBeenCalledWith('</html>');
+        });
     });
 });
