@@ -4,7 +4,7 @@ describe('HTML generator', function() {
     
     beforeEach(function() {
         logSpy = jasmine.createSpy('console.log');
-        htmlgenerator = katasemeion.output.html(logSpy);
+        htmlgenerator = katasemeion.make.htmlgenerator(logSpy);
     });
 
     it('should exist', function() {

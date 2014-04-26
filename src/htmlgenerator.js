@@ -1,4 +1,4 @@
-katasemeion.output.html = function(outFunction) {
+katasemeion.make.htmlgenerator = function(outFunction) {
     var self = {};
     self.element = function(tagName) {
         var elem = {};
