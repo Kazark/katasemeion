@@ -47,5 +47,16 @@ describe('output module for HTML', function() {
             expect(outputText).toBe('<span class="annotation">]</span>');
         });
     });
+
+    describe('for a section of words inserted by the translator', function() {
+        it('should know how to output the HTML format for beginning the section', function() {
+            html.insertion.openTag();
+            expect(outputText).toBe('<span class="annotation">⸤</span>');
+        });
+        it('should know how to output the HTML format for ending the section', function() {
+            html.insertion.closeTag();
+            expect(outputText).toBe('<span class="annotation">⸥</span>');
+        });
+    });
 });
 
