@@ -3,6 +3,8 @@ katasemeion.make.output.html = function(generator) {
     var self = {
         write: {}
     };
+    var footnoteMarker = generator.span().setAttribute('class', 'footnote-marker');
+    var footnoteContents = generator.span().setAttribute('class', 'footnote');
 
     function annotateWith(beginSymbol, endSymbol) {
         var annotated = {};
@@ -14,6 +16,18 @@ katasemeion.make.output.html = function(generator) {
         };
         return annotated;
     }
+
+    self.footnote = (function() {
+        var f = {};
+        f.openTag = function() {
+            footnoteMarker.wrap('*');
+            footnoteContents.openTag();
+        };
+        f.closeTag = function() {
+            footnoteContents.closeTag();
+        };
+        return f;
+    })();
 
     self.variant = annotateWith('[', ']');
     self.insertion = annotateWith('⸤', '⸥');
