@@ -15,7 +15,9 @@ katasemeion.output.html = function(outFunction) {
         html: self.element('html'),
         head: self.element('head'),
         body: self.element('body'),
-        p: self.element('p')
+        p: self.element('p'),
+        blockquote: self.element('blockquote'),
+        span: self.element('span'),
     };
 
     self.generateHeader = function() {

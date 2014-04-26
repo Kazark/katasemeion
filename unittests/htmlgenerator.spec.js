@@ -44,6 +44,14 @@ describe('HTML generator', function() {
         it('should contain a <p> paragraph element', function() {
             expect(isElement(htmlgenerator.elementList.p)).toBe(true);
         });
+
+        it('should contain a <blockquote> paragraph element', function() {
+            expect(isElement(htmlgenerator.elementList.blockquote)).toBe(true);
+        });
+
+        it('should contain a <span> paragraph element', function() {
+            expect(isElement(htmlgenerator.elementList.span)).toBe(true);
+        });
     });
 });
 
