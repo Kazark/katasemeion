@@ -1,10 +1,11 @@
 describe('output module for HTML', function() {
     var html;
-    var logSpy;
+    var outputText;
     
     beforeEach(function() {
-        logSpy = jasmine.createSpy('console.log');
-        html = katasemeion.make.output.html(katasemeion.make.htmlgenerator(logSpy));
+        var writeOut = function(text) { outputText += text; };
+        outputText = '';
+        html = katasemeion.make.output.html(katasemeion.make.htmlgenerator(writeOut));
     });
 
     it('should exist', function() {
@@ -12,23 +13,39 @@ describe('output module for HTML', function() {
     });
 
     it('should know how to output the HTML format for a verse number', function() {
-        html.write.verseNumber.openTag();
-        expect(logSpy).toHaveBeenCalledWith('<span class="verse-number">');
+        html.verseNumber.openTag();
+        expect(outputText).toBe('<span class="verse-number">');
+    });
+
+    it('should know how to output the HTML format for a chapter number', function() {
+        html.chapterNumber.openTag();
+        expect(outputText).toBe('<span class="chapter-number">');
     });
 
     it('should know how to output the HTML format for a paragraph', function() {
-        html.write.paragraph.openTag();
-        expect(logSpy).toHaveBeenCalledWith('<p>');
+        html.paragraph.openTag();
+        expect(outputText).toBe('<p>');
     });
 
     it('should know how to output the HTML format for a block quote', function() {
-        html.write.blockquote.openTag();
-        expect(logSpy).toHaveBeenCalledWith('<blockquote>');
+        html.blockquote.openTag();
+        expect(outputText).toBe('<blockquote>');
     });
 
     it('should know how to output the HTML format for section marked TODO', function() {
-        html.write.todo.openTag();
-        expect(logSpy).toHaveBeenCalledWith('<span class="todo">');
+        html.todo.openTag();
+        expect(outputText).toBe('<span class="todo">');
+    });
+
+    describe('for a section marked as a textual variant', function() {
+        it('should know how to output the HTML format for beginning the section', function() {
+            html.variant.openTag();
+            expect(outputText).toBe('<span class="annotation">[</span>');
+        });
+        it('should know how to output the HTML format for ending the section', function() {
+            html.variant.closeTag();
+            expect(outputText).toBe('<span class="annotation">]</span>');
+        });
     });
 });
 
