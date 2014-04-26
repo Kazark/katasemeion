@@ -11,7 +11,7 @@ describe('HTML generator', function() {
         expect(htmlgenerator).toBeTruthy();
     });
 
-    describe('element', function() {
+    describe('element object', function() {
         it('should know how to generate an open tag', function() {
             var element = htmlgenerator.element('html');
             element.openTag();
@@ -25,8 +25,7 @@ describe('HTML generator', function() {
         });
 
         it('should know how to add an attribute to the opening tag', function() {
-            var element = htmlgenerator.element('body');
-            element.setAttribute('foo', 'bar');
+            var element = htmlgenerator.element('body').setAttribute('foo', 'bar');
             element.openTag();
             expect(logSpy).toHaveBeenCalledWith('<body foo="bar">');
             element.closeTag();
@@ -34,40 +33,39 @@ describe('HTML generator', function() {
         });
 
         it('should not add attributes to the closing tag', function() {
-            var element = htmlgenerator.element('body');
-            element.setAttribute('foo', 'bar');
+            var element = htmlgenerator.element('body').setAttribute('foo', 'bar');
             element.closeTag();
             expect(logSpy).toHaveBeenCalledWith('</body>');
         });
     });
 
-    describe('element list', function() {
+    describe('specific element generators', function() {
         function isElement(object) {
             return object && typeof object.closeTag === 'function' && typeof object.openTag === 'function';
         }
 
-        it('should contain a top-level <html> element', function() {
-            expect(isElement(htmlgenerator.elements.html)).toBe(true);
+        it('should contain a top-level <html> element generator', function() {
+            expect(isElement(htmlgenerator.html())).toBe(true);
         });
 
-        it('should contain a <head> element', function() {
-            expect(isElement(htmlgenerator.elements.head)).toBe(true);
+        it('should contain a <head> element generator', function() {
+            expect(isElement(htmlgenerator.head())).toBe(true);
         });
 
-        it('should contain a <body> element', function() {
-            expect(isElement(htmlgenerator.elements.body)).toBe(true);
+        it('should contain a <body> element generator', function() {
+            expect(isElement(htmlgenerator.body())).toBe(true);
         });
 
-        it('should contain a <p> paragraph element', function() {
-            expect(isElement(htmlgenerator.elements.p)).toBe(true);
+        it('should contain a <p> paragraph element generator', function() {
+            expect(isElement(htmlgenerator.p())).toBe(true);
         });
 
-        it('should contain a <blockquote> paragraph element', function() {
-            expect(isElement(htmlgenerator.elements.blockquote)).toBe(true);
+        it('should contain a <blockquote> paragraph element generator', function() {
+            expect(isElement(htmlgenerator.blockquote())).toBe(true);
         });
 
-        it('should contain a <span> paragraph element', function() {
-            expect(isElement(htmlgenerator.elements.span)).toBe(true);
+        it('should contain a <span> paragraph element generator', function() {
+            expect(isElement(htmlgenerator.span())).toBe(true);
         });
     });
 });

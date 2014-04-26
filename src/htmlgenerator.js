@@ -11,18 +11,17 @@ katasemeion.make.htmlgenerator = function(outFunction) {
         };
         elem.setAttribute = function(name, value) {
             attributes += ' ' + name + '="' + value + '"';
+            return elem;
         };
         return elem;
     };
 
-    self.elements = {
-        html: self.element('html'),
-        head: self.element('head'),
-        body: self.element('body'),
-        p: self.element('p'),
-        blockquote: self.element('blockquote'),
-        span: self.element('span'),
-    };
+    self.html = function() { return self.element('html'); };
+    self.head = function() { return self.element('head'); };
+    self.body = function() { return self.element('body'); };
+    self.p = function() { return self.element('p'); };
+    self.blockquote = function() { return self.element('blockquote'); };
+    self.span = function() { return self.element('span'); };
 
     return self;
 };
