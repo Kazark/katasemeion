@@ -3,15 +3,20 @@ katasemeion.make.htmlgenerator = function(outFunction) {
     self.element = function(tagName) {
         var elem = {};
         var attributes = '';
+        elem.setAttribute = function(name, value) {
+            attributes += ' ' + name + '="' + value + '"';
+            return elem;
+        };
         elem.openTag = function() {
             outFunction('<' + tagName + attributes + '>');
         };
         elem.closeTag = function() {
             outFunction('</' + tagName + '>');
         };
-        elem.setAttribute = function(name, value) {
-            attributes += ' ' + name + '="' + value + '"';
-            return elem;
+        elem.wrap = function(value) {
+            elem.openTag();
+            outFunction(value);
+            elem.closeTag();
         };
         return elem;
     };
