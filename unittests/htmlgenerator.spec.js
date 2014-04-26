@@ -1,8 +1,9 @@
 describe('HTML generator', function() {
     var htmlgenerator;
-    var logSpy = jasmine.createSpy('console.log');
+    var logSpy;
     
     beforeEach(function() {
+        logSpy = jasmine.createSpy('console.log');
         htmlgenerator = katasemeion.output.html(logSpy);
     });
 
@@ -22,6 +23,22 @@ describe('HTML generator', function() {
             element.closeTag();
             expect(logSpy).toHaveBeenCalledWith('</html>');
         });
+
+        it('should know how to add an attribute to the opening tag', function() {
+            var element = htmlgenerator.element('body');
+            element.setAttribute('foo', 'bar');
+            element.openTag();
+            expect(logSpy).toHaveBeenCalledWith('<body foo="bar">');
+            element.closeTag();
+            expect(logSpy).toHaveBeenCalledWith('</body>');
+        });
+
+        it('should not add attributes to the closing tag', function() {
+            var element = htmlgenerator.element('body');
+            element.setAttribute('foo', 'bar');
+            element.closeTag();
+            expect(logSpy).toHaveBeenCalledWith('</body>');
+        });
     });
 
     describe('element list', function() {
@@ -30,27 +47,27 @@ describe('HTML generator', function() {
         }
 
         it('should contain a top-level <html> element', function() {
-            expect(isElement(htmlgenerator.elementList.html)).toBe(true);
+            expect(isElement(htmlgenerator.elements.html)).toBe(true);
         });
 
         it('should contain a <head> element', function() {
-            expect(isElement(htmlgenerator.elementList.head)).toBe(true);
+            expect(isElement(htmlgenerator.elements.head)).toBe(true);
         });
 
         it('should contain a <body> element', function() {
-            expect(isElement(htmlgenerator.elementList.body)).toBe(true);
+            expect(isElement(htmlgenerator.elements.body)).toBe(true);
         });
 
         it('should contain a <p> paragraph element', function() {
-            expect(isElement(htmlgenerator.elementList.p)).toBe(true);
+            expect(isElement(htmlgenerator.elements.p)).toBe(true);
         });
 
         it('should contain a <blockquote> paragraph element', function() {
-            expect(isElement(htmlgenerator.elementList.blockquote)).toBe(true);
+            expect(isElement(htmlgenerator.elements.blockquote)).toBe(true);
         });
 
         it('should contain a <span> paragraph element', function() {
-            expect(isElement(htmlgenerator.elementList.span)).toBe(true);
+            expect(isElement(htmlgenerator.elements.span)).toBe(true);
         });
     });
 });
