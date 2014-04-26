@@ -67,6 +67,10 @@ describe('HTML generator', function() {
         it('should contain a <span> paragraph element generator', function() {
             expect(isElement(htmlgenerator.span())).toBe(true);
         });
+
+        it('should contain a <div> paragraph element generator', function() {
+            expect(isElement(htmlgenerator.div())).toBe(true);
+        });
     });
 });
 

@@ -22,6 +22,7 @@ katasemeion.make.htmlgenerator = function(outFunction) {
     self.p = function() { return self.element('p'); };
     self.blockquote = function() { return self.element('blockquote'); };
     self.span = function() { return self.element('span'); };
+    self.div = function() { return self.element('div'); };
 
     return self;
 };
