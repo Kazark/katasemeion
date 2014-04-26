@@ -58,5 +58,16 @@ describe('output module for HTML', function() {
             expect(outputText).toBe('<span class="annotation">⸥</span>');
         });
     });
+
+    describe('for a section of words which are marked as the subject of a footnote', function() {
+        it('should know how to output the HTML format for beginning the section', function() {
+            html.footnoteSubject.openTag();
+            expect(outputText).toBe('<span class="annotation">⸢</span>');
+        });
+        it('should know how to output the HTML format for ending the section', function() {
+            html.footnoteSubject.closeTag();
+            expect(outputText).toBe('<span class="annotation">⸣</span>');
+        });
+    });
 });
 

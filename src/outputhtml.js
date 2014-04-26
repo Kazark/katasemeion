@@ -17,6 +17,7 @@ katasemeion.make.output.html = function(generator) {
 
     self.variant = annotateWith('[', ']');
     self.insertion = annotateWith('⸤', '⸥');
+    self.footnoteSubject = annotateWith('⸢', '⸣');
 
     self.chapterNumber = generator.span().setAttribute('class', 'chapter-number');
     self.verseNumber = generator.span().setAttribute('class', 'verse-number');
