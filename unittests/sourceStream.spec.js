@@ -1,3 +1,4 @@
+/* jshint expr: true */
 describe('Κατασημεῖον source text stream', function() {
     var sourceStream = katasemeion.sourceStream;
     var characters;
@@ -7,18 +8,18 @@ describe('Κατασημεῖον source text stream', function() {
     });
 
     it('should be initialized pointing to the first character of its string', function() {
-        expect(characters.current).toBe('a');
+        characters.current.should.equal('a');
     });
 
     it('should know when it has not pasted the end', function() {
-        expect(characters.pastEnd).toBe(false);
+        characters.pastEnd.should.be.false;
     });
 
     it('should provide a way to advance the cursor', function() {
         characters.advanceCursor();
-        expect(characters.current).toBe('s');
+        characters.current.should.equal('s');
         characters.advanceCursor();
-        expect(characters.current).toBe('d');
+        characters.current.should.equal('d');
     });
 
     it('should know when it has pasted the end', function() {
@@ -26,7 +27,7 @@ describe('Κατασημεῖον source text stream', function() {
         characters.advanceCursor();
         characters.advanceCursor();
         characters.advanceCursor();
-        expect(characters.pastEnd).toBe(true);
+        characters.pastEnd.should.be.true;
     });
 
     it('should set the current character to null when advanced past the end', function() {
@@ -34,6 +35,6 @@ describe('Κατασημεῖον source text stream', function() {
         characters.advanceCursor();
         characters.advanceCursor();
         characters.advanceCursor();
-        expect(characters.current).toBe(null);
+        should.not.exist(characters.current);
     });
 });

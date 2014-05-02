@@ -1,8 +1,9 @@
+/* jshint expr: true */
 describe('Κατασημεῖον lexer', function() {
     var tokens = katasemeion.tokens;
 
     it('should exist', function() {
-        expect(katasemeion.lexer).toBeTruthy();
+        katasemeion.lexer.should.be.ok;
     });
 
     describe('lex()', function() {
@@ -13,10 +14,10 @@ describe('Κατασημεῖον lexer', function() {
 
         beforeEach(function() {
             fakeTokenizers = [
-                jasmine.createSpy('tokenizer1'),
-                jasmine.createSpy('tokenizer2')
+                sinon.spy(),
+                sinon.spy()
             ];
-            tokenOutputCallback = jasmine.createSpy('tokenOutputCallback');
+            tokenOutputCallback = sinon.spy();
             lexer = katasemeion.make.lexer(katasemeion.tokens, { all : fakeTokenizers }, tokenOutputCallback);
             stream = katasemeion.sourceStream("a");
         });
@@ -24,16 +25,15 @@ describe('Κατασημεῖον lexer', function() {
         it('should invoke each of the tokenizers in turn', function() {
             lexer.lex(stream);
 
-            expect(fakeTokenizers[0]).toHaveBeenCalledWith(stream);
-            expect(fakeTokenizers[1]).toHaveBeenCalledWith(stream);
+            fakeTokenizers[0].calledWith(stream).should.be.true;
+            fakeTokenizers[1].calledWith(stream).should.be.true;
         });
 
         it('should not pass return value of tokenizers to the callback function if it is falsy', function() {
             lexer.lex(stream);
 
-            expect(tokenOutputCallback).not.toHaveBeenCalledWith(null);
-            expect(tokenOutputCallback).not.toHaveBeenCalledWith(undefined);
-            expect(tokenOutputCallback.calls.count()).toEqual(1);
+            tokenOutputCallback.args[0].should.exist;
+            tokenOutputCallback.calledOnce.should.be.true;
         });
 
         it('should pass parsed tokens to the callback function', function() {
@@ -41,22 +41,22 @@ describe('Κατασημεῖον lexer', function() {
 
             lexer.lex(stream);
 
-            expect(tokenOutputCallback).toHaveBeenCalledWith(tokens.Hash);
+            tokenOutputCallback.calledWith(tokens.Hash).should.be.true;
         });
 
         describe('if none of the tokenizers recognize the character', function() {
             it('should pass a character token to the callback function with the character', function() {
                 lexer.lex(stream);
 
-                var token = tokenOutputCallback.calls.mostRecent().args[0];
-                expect(token.is(tokens.Character)).toBe(true);
-                expect(token.data).toBe('a');
+                var token = tokenOutputCallback.lastCall.args[0];
+                token.is(tokens.Character).should.be.true;
+                token.data.should.equal('a');
             });
 
             it('should advance the cursor of the source stream', function() {
                 lexer.lex(stream);
 
-                expect(stream.pastEnd).toBe(true);
+                stream.pastEnd.should.be.true;
             });
         });
 
@@ -65,8 +65,8 @@ describe('Κατασημεῖον lexer', function() {
 
             lexer.lex(stream);
 
-            expect(tokenOutputCallback.calls.count()).toEqual(4);
-            expect(stream.pastEnd).toBe(true);
+            tokenOutputCallback.callCount.should.equal(4);
+            stream.pastEnd.should.be.true;
         });
     });
 });

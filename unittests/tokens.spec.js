@@ -1,8 +1,9 @@
+/* jshint expr: true */
 describe('Κατασημεῖον tokens module', function() {
     var tokens = katasemeion.tokens;
 
     it('should exist', function() {
-        expect(tokens).toBeTruthy();
+        tokens.should.be.ok;
     });
 
     describe('token type factory', function() {
@@ -10,27 +11,27 @@ describe('Κατασημεῖον tokens module', function() {
 
         it('should create token types', function() {
             var tokenType = makeTokenType(1);
-            expect(tokenType).toBeTruthy();
+            tokenType.should.be.ok;
         });
 
         describe('a token type', function() {
             it('should be a token factory', function() {
                 var token = makeTokenType(1)();
-                expect(token).toBeTruthy();
+                token.should.be.ok;
             });
 
             describe('a token', function() {
                 it('should know its type', function() {
                     var tokenType = makeTokenType(1);
                     var token = tokenType();
-                    expect(token.is(tokenType)).toBe(true);
+                    token.is(tokenType).should.be.true;
                 });
 
                 it('should know it is not of another type', function() {
                     var tokenType1 = makeTokenType(1);
                     var tokenType2 = makeTokenType(2);
                     var token = tokenType1();
-                    expect(token.is(tokenType2)).toBe(false);
+                    token.is(tokenType2).should.be.false;
                 });
             });
         });
@@ -42,91 +43,91 @@ describe('Κατασημεῖον tokens module', function() {
         };
 
         it('should include open square bracket', function() {
-            expect(isTokenType(tokens.OpenBracket)).toBe(true);
+            isTokenType(tokens.OpenBracket).should.be.true;
         });
 
         it('should include double open square bracket', function() {
-            expect(isTokenType(tokens.DoubleOpenBracket)).toBe(true);
+            isTokenType(tokens.DoubleOpenBracket).should.be.true;
         });
 
         it('should include close square bracket', function() {
-            expect(isTokenType(tokens.CloseBracket)).toBe(true);
+            isTokenType(tokens.CloseBracket).should.be.true;
         });
 
         it('should include double close square bracket', function() {
-            expect(isTokenType(tokens.DoubleCloseBracket)).toBe(true);
+            isTokenType(tokens.DoubleCloseBracket).should.be.true;
         });
 
         it('should include open angle bracket', function() {
-            expect(isTokenType(tokens.OpenAngle)).toBe(true);
+            isTokenType(tokens.OpenAngle).should.be.true;
         });
 
         it('should include close angle bracket', function() {
-            expect(isTokenType(tokens.CloseAngle)).toBe(true);
+            isTokenType(tokens.CloseAngle).should.be.true;
         });
 
         it('should include "at" sign', function() {
-            expect(isTokenType(tokens.At)).toBe(true);
+            isTokenType(tokens.At).should.be.true;
         });
 
         it('should include an "at" sign with open curly brace combination', function() {
-            expect(isTokenType(tokens.AtWithOpenBrace)).toBe(true);
+            isTokenType(tokens.AtWithOpenBrace).should.be.true;
         });
 
         it('should include a close curly brace', function() {
-            expect(isTokenType(tokens.CloseBrace)).toBe(true);
+            isTokenType(tokens.CloseBrace).should.be.true;
         });
 
         it('should include asterisk', function() {
-            expect(isTokenType(tokens.Asterisk)).toBe(true);
+            isTokenType(tokens.Asterisk).should.be.true;
         });
 
         it('should include double asterisk', function() {
-            expect(isTokenType(tokens.DoubleAsterisk)).toBe(true);
+            isTokenType(tokens.DoubleAsterisk).should.be.true;
         });
 
         it('should include space', function() {
-            expect(isTokenType(tokens.Space)).toBe(true);
+            isTokenType(tokens.Space).should.be.true;
         });
 
         it('should include newline', function() {
-            expect(isTokenType(tokens.Newline)).toBe(true);
+            isTokenType(tokens.Newline).should.be.true;
         });
 
         it('should include double newline', function() {
-            expect(isTokenType(tokens.DoubleNewline)).toBe(true);
+            isTokenType(tokens.DoubleNewline).should.be.true;
         });
 
         it('should include indent', function() {
-            expect(isTokenType(tokens.Indent)).toBe(true);
+            isTokenType(tokens.Indent).should.be.true;
         });
 
         it('should include underscore', function() {
-            expect(isTokenType(tokens.Underscore)).toBe(true);
+            isTokenType(tokens.Underscore).should.be.true;
         });
 
         it('should include hash', function() {
-            expect(isTokenType(tokens.Hash)).toBe(true);
+            isTokenType(tokens.Hash).should.be.true;
         });
 
         it('should include dollar sign', function() {
-            expect(isTokenType(tokens.Dollar)).toBe(true);
+            isTokenType(tokens.Dollar).should.be.true;
         });
 
         it('should include dollar sign with an open curly brace combination', function() {
-            expect(isTokenType(tokens.DollarWithOpenBrace)).toBe(true);
+            isTokenType(tokens.DollarWithOpenBrace).should.be.true;
         });
 
         it('should include percent sign', function() {
-            expect(isTokenType(tokens.Percent)).toBe(true);
+            isTokenType(tokens.Percent).should.be.true;
         });
 
         it('should include percent sign with an open curly brace combination', function() {
-            expect(isTokenType(tokens.PercentWithOpenBrace)).toBe(true);
+            isTokenType(tokens.PercentWithOpenBrace).should.be.true;
         });
 
         it('should include plain text character', function() {
-            expect(isTokenType(tokens.Character)).toBe(true);
+            isTokenType(tokens.Character).should.be.true;
         });
     });
 });

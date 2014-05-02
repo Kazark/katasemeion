@@ -1,3 +1,4 @@
+/* jshint expr: true */
 describe('output module for HTML', function() {
     var html;
     var outputText;
@@ -9,75 +10,75 @@ describe('output module for HTML', function() {
     });
 
     it('should exist', function() {
-        expect(html).toBeTruthy();
+        html.should.be.ok;
     });
 
     it('should know how to output the HTML format for a verse number', function() {
         html.verseNumber.openTag();
-        expect(outputText).toBe('<span class="verse-number">');
+        outputText.should.equal('<span class="verse-number">');
     });
 
     it('should know how to output the HTML format for a chapter number', function() {
         html.chapterNumber.openTag();
-        expect(outputText).toBe('<span class="chapter-number">');
+        outputText.should.equal('<span class="chapter-number">');
     });
 
     it('should know how to output the HTML format for a paragraph', function() {
         html.paragraph.openTag();
-        expect(outputText).toBe('<p>');
+        outputText.should.equal('<p>');
     });
 
     it('should know how to output the HTML format for a block quote', function() {
         html.blockquote.openTag();
-        expect(outputText).toBe('<blockquote>');
+        outputText.should.equal('<blockquote>');
     });
 
     it('should know how to output the HTML format for section marked TODO', function() {
         html.todo.openTag();
-        expect(outputText).toBe('<span class="todo">');
+        outputText.should.equal('<span class="todo">');
     });
 
     describe('for a section marked as a textual variant', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.variant.openTag();
-            expect(outputText).toBe('<span class="annotation">[</span>');
+            outputText.should.equal('<span class="annotation">[</span>');
         });
         it('should know how to output the HTML format for ending the section', function() {
             html.variant.closeTag();
-            expect(outputText).toBe('<span class="annotation">]</span>');
+            outputText.should.equal('<span class="annotation">]</span>');
         });
     });
 
     describe('for a section of words inserted by the translator', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.insertion.openTag();
-            expect(outputText).toBe('<span class="annotation">⸤</span>');
+            outputText.should.equal('<span class="annotation">⸤</span>');
         });
         it('should know how to output the HTML format for ending the section', function() {
             html.insertion.closeTag();
-            expect(outputText).toBe('<span class="annotation">⸥</span>');
+            outputText.should.equal('<span class="annotation">⸥</span>');
         });
     });
 
     describe('for a section of words which are marked as the subject of a footnote', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.footnoteSubject.openTag();
-            expect(outputText).toBe('<span class="annotation">⸢</span>');
+            outputText.should.equal('<span class="annotation">⸢</span>');
         });
         it('should know how to output the HTML format for ending the section', function() {
             html.footnoteSubject.closeTag();
-            expect(outputText).toBe('<span class="annotation">⸣</span>');
+            outputText.should.equal('<span class="annotation">⸣</span>');
         });
     });
 
     describe('for footnote contents', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.footnote.openTag();
-            expect(outputText).toBe('<span class="footnote-marker">*</span><span class="footnote">');
+            outputText.should.equal('<span class="footnote-marker">*</span><span class="footnote">');
         });
         it('should know how to output the HTML format for ending the section', function() {
             html.footnote.closeTag();
-            expect(outputText).toBe('</span>');
+            outputText.should.equal('</span>');
         });
     });
 });

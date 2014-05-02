@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
     var mainOutputScript = 'build/katasemeion.js';
+    var specPathGlob = 'unittests/*.spec.js';
+    var concattedSpecs = 'build/specs.js';
     var jasmineOutputFile = 'build/test-results.html';
     grunt.initConfig({
         concat: {
@@ -19,12 +21,16 @@ module.exports = function(grunt) {
                     'src/outputhtml.js',
                     'src/outro.js.frag'
                 ]
-            }
+            },
+            specs: {
+                dest: concattedSpecs,
+                src: [specPathGlob],
+            },
         },
         watch: {
             scripts: {
-                files: ['Gruntfile.js', 'src/*.js*', 'unittests/*.spec.js'],
-                tasks: ['unittests']
+                files: ['Gruntfile.js', 'src/*.js*', specPathGlob],
+                tasks: ['specs']
             }
         },
         jshint: {
@@ -38,11 +44,20 @@ module.exports = function(grunt) {
                 }
             }
         },
+        mocha: {
+            options: {
+                run: true,
+                reporter: 'Spec',
+            },
+            test: {
+                src: ['unittests/specs.html'],
+            },
+        },
         jasmine: {
             all: {
                 src: mainOutputScript,
                 options: {
-                    specs: 'unittests/*.spec.js',
+                    specs: specPathGlob,
                     outfile: jasmineOutputFile,
                     keepRunner: true
                 }
@@ -54,8 +69,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-mocha');
 
+    grunt.registerTask('specs', ['concat', 'jshint', 'mocha']);
     grunt.registerTask('unittests', ['concat', 'jshint', 'jasmine:all']);
-    grunt.registerTask('default', ['unittests']);
+    grunt.registerTask('default', ['specs']);
     grunt.registerTask('dev', ['default', 'watch']);
 };
