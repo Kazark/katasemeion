@@ -23,7 +23,6 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-csslint": "~0.2.0",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-jasmine": "~0.6.1",
     "chai": "~1.9.1",
     "sinon": "~1.9.1",
     "grunt-mocha": "~0.4.10"
