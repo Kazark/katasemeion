@@ -14,6 +14,7 @@ module.exports = function(grunt) {
                     'src/sourceStream.js',
                     'src/tokens.js',
                     'src/tokenizers.js',
+                    'src/translator.js',
                     'src/lexer.js',
                     'src/parser.js',
                     'src/htmlgenerator.js',
