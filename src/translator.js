@@ -40,6 +40,9 @@ katasemeion.make.translator = function(tokens, output) {
     .block(output.insertion)
         .beginsAt(tokens.OpenBracket)
         .andEndsAt(tokens.CloseBracket)
+    .block(output.variant)
+        .beginsAt(tokens.DoubleOpenBracket)
+        .andEndsAt(tokens.DoubleCloseBracket)
     .build();
     return self;
 };

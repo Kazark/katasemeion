@@ -59,4 +59,19 @@ describe('translator', function() {
             output.insertion.closeTag.calledOnce.should.be.true;
         });
     });
+
+    describe('should recognize variant blocks, meaning it...', function() {
+        beforeEach(function() {
+            output.variant = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin the block when a doubled open square bracket [[ is encountered', function() {
+            translator.translate(tokens.DoubleOpenBracket());
+            output.variant.openTag.calledOnce.should.be.true;
+        });
+        it('should end the block when a doubled close square bracket ]] is encountered', function() {
+            translator.translate(tokens.DoubleCloseBracket());
+            output.variant.closeTag.calledOnce.should.be.true;
+        });
+    });
 });
