@@ -1,7 +1,22 @@
-katasemeion.make.translator = function(output) {
+katasemeion.make.translator = function(tokens, output) {
     var self = {};
-    self.translate = function() {
-        output.todo.openTag();
+    self.translate = function(token) {
+        if (token.is(tokens.OpenAngle))
+        {
+            output.todo.openTag();
+        }
+        else if (token.is(tokens.CloseAngle))
+        {
+            output.todo.closeTag();
+        }
+        else if (token.is(tokens.OpenBracket))
+        {
+            output.insertion.openTag();
+        }
+        else
+        {
+            output.insertion.closeTag();
+        }
     };
     return self;
 };

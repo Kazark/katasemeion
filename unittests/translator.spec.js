@@ -2,25 +2,56 @@
 describe('translator', function() {
     var translator;
     var tokens = katasemeion.tokens;
-    var output;
+    var outputterMock;
+
+    function buildTestSubject(output) {
+        translator = katasemeion.make.translator(katasemeion.tokens, output);
+    }
     
     beforeEach(function() {
-        var outputter = {
+        outputterMock = {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
-        output = {
-            todo: outputter,
-        };
-        translator = katasemeion.make.translator(output);
     });
 
     it('should exist', function() {
-        translator.should.be.ok;
+        katasemeion.make.translator.should.be.ok;
     });
 
-    it('should open a TODO block when the open angle bracket < is encountered', function() {
-        translator.translate(tokens.OpenAngle());
-        output.todo.openTag.calledOnce.should.be.true;
+    describe('should recognize TODO blocks, meaning it...', function() {
+        var output;
+        beforeEach(function() {
+            output = {
+                todo: outputterMock
+            };
+            buildTestSubject(output);
+        });
+        it('should begin the block when the open angle bracket < is encountered', function() {
+            translator.translate(tokens.OpenAngle());
+            output.todo.openTag.calledOnce.should.be.true;
+        });
+        it('should end the block when the closing angle bracket > is encountered', function() {
+            translator.translate(tokens.CloseAngle());
+            output.todo.closeTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize insertion blocks, meaning it...', function() {
+        var output;
+        beforeEach(function() {
+            output = {
+                insertion: outputterMock
+            };
+            buildTestSubject(output);
+        });
+        it('should begin the block when the open square bracket [ is encountered', function() {
+            translator.translate(tokens.OpenBracket());
+            output.insertion.openTag.calledOnce.should.be.true;
+        });
+        it('should end the block when the close square bracket ] is encountered', function() {
+            translator.translate(tokens.CloseBracket());
+            output.insertion.closeTag.calledOnce.should.be.true;
+        });
     });
 });
