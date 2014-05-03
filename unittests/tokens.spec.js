@@ -10,26 +10,32 @@ describe('Κατασημεῖον tokens module', function() {
         var makeTokenType = tokens.makeTokenType;
 
         it('should create token types', function() {
-            var tokenType = makeTokenType(1);
+            var tokenType = makeTokenType();
             tokenType.should.be.ok;
+        });
+
+        it('should create a new token type on each call', function() {
+            var tokenType1 = makeTokenType();
+            var tokenType2 = makeTokenType();
+            tokenType1.should.not.equal(tokenType2);
         });
 
         describe('a token type', function() {
             it('should be a token factory', function() {
-                var token = makeTokenType(1)();
+                var token = makeTokenType()();
                 token.should.be.ok;
             });
 
             describe('a token', function() {
                 it('should know its type', function() {
-                    var tokenType = makeTokenType(1);
+                    var tokenType = makeTokenType();
                     var token = tokenType();
                     token.is(tokenType).should.be.true;
                 });
 
                 it('should know it is not of another type', function() {
-                    var tokenType1 = makeTokenType(1);
-                    var tokenType2 = makeTokenType(2);
+                    var tokenType1 = makeTokenType();
+                    var tokenType2 = makeTokenType();
                     var token = tokenType1();
                     token.is(tokenType2).should.be.false;
                 });
