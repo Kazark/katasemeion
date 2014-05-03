@@ -19,6 +19,16 @@ describe('translator', function() {
         katasemeion.make.translator.should.be.ok;
     });
 
+    it('should ignore unknown tokens (for now)', function() {
+        var disableOutputting = null;
+        buildTestSubject(disableOutputting);
+
+        var UnknownTokenType = tokens.makeTokenType();
+        var tokenOfUnknownType = UnknownTokenType();
+
+        translator.translate(tokenOfUnknownType);
+    });
+
     describe('should recognize TODO blocks, meaning it...', function() {
         var output;
         beforeEach(function() {

@@ -13,7 +13,7 @@ katasemeion.make.translator = function(tokens, output) {
         {
             output.insertion.openTag();
         }
-        else
+        else if (token.is(tokens.CloseBracket))
         {
             output.insertion.closeTag();
         }
