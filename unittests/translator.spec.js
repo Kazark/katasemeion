@@ -3,8 +3,9 @@ describe('translator', function() {
     var translator;
     var tokens = katasemeion.tokens;
     var outputterMock;
+    var output;
 
-    function buildTestSubject(output) {
+    function buildTestSubject() {
         translator = katasemeion.make.translator(katasemeion.tokens, output);
     }
     
@@ -13,6 +14,7 @@ describe('translator', function() {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
+        output = { todo: null, insertion: null };
     });
 
     it('should exist', function() {
@@ -20,8 +22,7 @@ describe('translator', function() {
     });
 
     it('should ignore unknown tokens (for now)', function() {
-        var disableOutputting = null;
-        buildTestSubject(disableOutputting);
+        buildTestSubject(); // All members are null; it will throw if translator tries to output
 
         var UnknownTokenType = tokens.makeTokenType();
         var tokenOfUnknownType = UnknownTokenType();
@@ -30,12 +31,9 @@ describe('translator', function() {
     });
 
     describe('should recognize TODO blocks, meaning it...', function() {
-        var output;
         beforeEach(function() {
-            output = {
-                todo: outputterMock
-            };
-            buildTestSubject(output);
+            output.todo = outputterMock;
+            buildTestSubject();
         });
         it('should begin the block when the open angle bracket < is encountered', function() {
             translator.translate(tokens.OpenAngle());
@@ -48,12 +46,9 @@ describe('translator', function() {
     });
 
     describe('should recognize insertion blocks, meaning it...', function() {
-        var output;
         beforeEach(function() {
-            output = {
-                insertion: outputterMock
-            };
-            buildTestSubject(output);
+            output.insertion = outputterMock;
+            buildTestSubject();
         });
         it('should begin the block when the open square bracket [ is encountered', function() {
             translator.translate(tokens.OpenBracket());

@@ -1,22 +1,45 @@
 katasemeion.make.translator = function(tokens, output) {
     var self = {};
-    self.translate = function(token) {
-        if (token.is(tokens.OpenAngle))
-        {
-            output.todo.openTag();
-        }
-        else if (token.is(tokens.CloseAngle))
-        {
-            output.todo.closeTag();
-        }
-        else if (token.is(tokens.OpenBracket))
-        {
-            output.insertion.openTag();
-        }
-        else if (token.is(tokens.CloseBracket))
-        {
-            output.insertion.closeTag();
-        }
+
+    var block = function(outputter, firstBlock) {
+        var nextBlock = function() {};
+        var openTokenType;
+        var closeTokenType;
+        var me = function(token) {
+            if (token.is(openTokenType)) {
+                outputter.openTag();
+            } else if(token.is(closeTokenType)) {
+                outputter.closeTag();
+            } else {
+                nextBlock(token);
+            }
+        };
+        if (!firstBlock) { firstBlock = me; }
+        me.beginsAt = function(x) {
+            openTokenType = x;
+            return me;
+        };
+        me.andEndsAt = function(x) {
+            closeTokenType = x;
+            return me;
+        };
+        me.block = function(nextOutputter) {
+            nextBlock = block(nextOutputter, firstBlock);
+            return nextBlock;
+        };
+        me.build = function() {
+            return firstBlock;
+        };
+        return me;
     };
+
+    self.translate = 
+    block(output.todo)
+        .beginsAt(tokens.OpenAngle)
+        .andEndsAt(tokens.CloseAngle)
+    .block(output.insertion)
+        .beginsAt(tokens.OpenBracket)
+        .andEndsAt(tokens.CloseBracket)
+    .build();
     return self;
 };
