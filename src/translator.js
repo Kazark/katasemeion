@@ -1,90 +1,69 @@
 katasemeion.make.translator = function(tokens, output) {
     var self = {};
 
-    var ifTokenIs = function(tokenType, firstMe) {
-        var _thenAction;
-        var _elseAction;
+    var map = function(tokenType) {
+        var _action;
         var me = function(token) {
             if (token.is(tokenType)) {
-                _thenAction();
+                _action();
             } else {
-                _elseAction(token);
+                me.passItOn(token);
             }
         };
-        if (!firstMe) { firstMe = me; }
-        me.then = function(x) {
-            _thenAction = x;
+        me.to = function(action) {
+            _action = action;
             return me;
         };
-        me.otherwise = function(x) {
-            _elseAction = x;
-            return me;
-        };
-        me.ifTokenIs = function(type) {
-            _elseAction = ifTokenIs(type, firstMe);
-            return _elseAction;
-        };
-        me.build = function() {
-            return firstMe;
-        };
+        me.passItOn = function() {};
         return me;
     };
 
-    var block = function(outputter, firstBlock) {
-        var nextBlock = function() {};
-        var openTokenType;
-        var closeTokenType;
-
+    var block = function(outputBlock) {
+        var _openTokenType;
+        var _closeTokenType;
         var me = function(token) {
-            if (token.is(openTokenType)) {
-                outputter.openTag();
-            } else if(token.is(closeTokenType)) {
-                outputter.closeTag();
+            if (token.is(_openTokenType)) {
+                outputBlock.openTag();
+            } else if (token.is(_closeTokenType)) {
+                outputBlock.closeTag();
             } else {
-                nextBlock(token);
+                me.passItOn(token);
             }
         };
-
-        if (!firstBlock) { firstBlock = me; }
-
         me.beginsAt = function(x) {
-            openTokenType = x;
+            _openTokenType = x;
             return me;
         };
         me.andEndsAt = function(x) {
-            closeTokenType = x;
+            _closeTokenType = x;
             return me;
         };
-
-        me.block = function(nextOutputter) {
-            nextBlock = block(nextOutputter, firstBlock);
-            return nextBlock;
-        };
-        me.build = function() {
-            return firstBlock;
-        };
-
+        me.passItOn = function() {};
         return me;
     };
 
-    self.translate = 
-    ifTokenIs(tokens.DoubleNewline)
-        .then(function() {
+    var buildTranslator = function(conditionals) {
+        for (var i = 0; i < conditionals.length-1; i++) {
+            conditionals[i].passItOn = conditionals[i+1];
+        }
+        return conditionals[0];
+    };
+
+    self.translate = buildTranslator([
+        map(tokens.DoubleNewline).to(function() {
             output.paragraph.closeTag();
             output.paragraph.openTag();
-        })
-    .otherwise(
-    block(output.todo)
-        .beginsAt(tokens.OpenAngle)
-        .andEndsAt(tokens.CloseAngle)
-    .block(output.insertion)
-        .beginsAt(tokens.OpenBracket)
-        .andEndsAt(tokens.CloseBracket)
-    .block(output.variant)
-        .beginsAt(tokens.DoubleOpenBracket)
-        .andEndsAt(tokens.DoubleCloseBracket)
-    .build())
-    .build();
+        }),
+        block(output.todo)
+            .beginsAt(tokens.OpenAngle)
+            .andEndsAt(tokens.CloseAngle),
+        block(output.insertion)
+            .beginsAt(tokens.OpenBracket)
+            .andEndsAt(tokens.CloseBracket),
+        block(output.variant)
+            .beginsAt(tokens.DoubleOpenBracket)
+            .andEndsAt(tokens.DoubleCloseBracket),
+    ]);
 
     return self;
 };

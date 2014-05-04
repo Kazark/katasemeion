@@ -14,7 +14,7 @@ describe('translator', function() {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
-        output = { todo: null, insertion: null, variant: null };
+        output = {};
     });
 
     it('should exist', function() {
