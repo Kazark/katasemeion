@@ -14,7 +14,7 @@ describe('translator', function() {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
-        output = { todo: null, insertion: null };
+        output = { todo: null, insertion: null, variant: null };
     });
 
     it('should exist', function() {
@@ -72,6 +72,18 @@ describe('translator', function() {
         it('should end the block when a doubled close square bracket ]] is encountered', function() {
             translator.translate(tokens.DoubleCloseBracket());
             output.variant.closeTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize paragraphs, meaning it...', function() {
+        beforeEach(function() {
+            output.paragraph = outputterMock;
+            buildTestSubject();
+        });
+        it('should end the previous one and begin a new one when two newline characters are encountered together', function() {
+            translator.translate(tokens.DoubleNewline());
+            output.paragraph.openTag.calledOnce.should.be.true;
+            output.paragraph.closeTag.calledOnce.should.be.true;
         });
     });
 });
