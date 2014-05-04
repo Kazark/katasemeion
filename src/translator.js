@@ -1,5 +1,6 @@
 katasemeion.make.translator = function(tokens, output) {
     var self = {};
+    var openedFootnoteSubject = false;
 
     var map = function(tokenType) {
         var _action;
@@ -53,6 +54,17 @@ katasemeion.make.translator = function(tokens, output) {
         map(tokens.DoubleNewline).to(function() {
             output.paragraph.closeTag();
             output.paragraph.openTag();
+        }),
+        map(tokens.At).to(function() {
+            output.footnoteSubject.openTag();
+            openedFootnoteSubject = true;
+        }),
+        map(tokens.AtWithOpenBrace).to(function() {
+            if (openedFootnoteSubject) {
+                output.footnoteSubject.closeTag();
+                openedFootnoteSubject = false;
+            }
+            output.footnote.openTag();
         }),
         block(output.todo)
             .beginsAt(tokens.OpenAngle)

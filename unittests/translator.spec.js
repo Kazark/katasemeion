@@ -35,11 +35,11 @@ describe('translator', function() {
             output.todo = outputterMock;
             buildTestSubject();
         });
-        it('should begin the block when the open angle bracket < is encountered', function() {
+        it('should begin the block when < is encountered', function() {
             translator.translate(tokens.OpenAngle());
             output.todo.openTag.calledOnce.should.be.true;
         });
-        it('should end the block when the closing angle bracket > is encountered', function() {
+        it('should end the block when > is encountered', function() {
             translator.translate(tokens.CloseAngle());
             output.todo.closeTag.calledOnce.should.be.true;
         });
@@ -50,11 +50,11 @@ describe('translator', function() {
             output.insertion = outputterMock;
             buildTestSubject();
         });
-        it('should begin the block when the open square bracket [ is encountered', function() {
+        it('should begin the block when [ is encountered', function() {
             translator.translate(tokens.OpenBracket());
             output.insertion.openTag.calledOnce.should.be.true;
         });
-        it('should end the block when the close square bracket ] is encountered', function() {
+        it('should end the block when ] is encountered', function() {
             translator.translate(tokens.CloseBracket());
             output.insertion.closeTag.calledOnce.should.be.true;
         });
@@ -65,11 +65,11 @@ describe('translator', function() {
             output.variant = outputterMock;
             buildTestSubject();
         });
-        it('should begin the block when a doubled open square bracket [[ is encountered', function() {
+        it('should begin the block when a [[ is encountered', function() {
             translator.translate(tokens.DoubleOpenBracket());
             output.variant.openTag.calledOnce.should.be.true;
         });
-        it('should end the block when a doubled close square bracket ]] is encountered', function() {
+        it('should end the block when a ]] is encountered', function() {
             translator.translate(tokens.DoubleCloseBracket());
             output.variant.closeTag.calledOnce.should.be.true;
         });
@@ -84,6 +84,45 @@ describe('translator', function() {
             translator.translate(tokens.DoubleNewline());
             output.paragraph.openTag.calledOnce.should.be.true;
             output.paragraph.closeTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize footnotes, meaning it...', function() {
+        beforeEach(function() {
+            output.footnoteSubject = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin the footnote subject when it encounters a @ without an {', function() {
+            translator.translate(tokens.At());
+            output.footnoteSubject.openTag.calledOnce.should.be.true;
+        });
+
+        describe('when it encounters an @{', function() {
+            beforeEach(function() {
+                output.footnote = {
+                    openTag: sinon.spy(),
+                    closeTag: sinon.spy(),
+                };
+            });
+            it('after an @, it should end the footnote subject and begin the footnote', function() {
+                translator.translate(tokens.At());
+                translator.translate(tokens.AtWithOpenBrace());
+                output.footnoteSubject.closeTag.calledOnce.should.be.true;
+                output.footnote.openTag.calledOnce.should.be.true;
+            });
+
+            it('not after an @, it should not end the footnote subject, but only begin the footnote', function() {
+                translator.translate(tokens.AtWithOpenBrace());
+                output.footnoteSubject.closeTag.called.should.be.false;
+                output.footnote.openTag.calledOnce.should.be.true;
+            });
+
+            it('after an @ has already been closed by a @{...}, it should not end the footnote subject', function() {
+                translator.translate(tokens.At());
+                translator.translate(tokens.AtWithOpenBrace());
+                translator.translate(tokens.AtWithOpenBrace());
+                output.footnoteSubject.closeTag.calledOnce.should.be.true;
+            });
         });
     });
 });
