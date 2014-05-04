@@ -14,7 +14,7 @@ describe('translator', function() {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
-        output = {};
+        output = { chapterNumber: {}, verseNumber: {}};
     });
 
     it('should exist', function() {
@@ -84,6 +84,28 @@ describe('translator', function() {
             translator.translate(tokens.DoubleNewline());
             output.paragraph.openTag.calledOnce.should.be.true;
             output.paragraph.closeTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize verse numbers, meaning it...', function() {
+        beforeEach(function() {
+            output.verseNumber = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin a verse number section when it encounters ${', function() {
+            translator.translate(tokens.DollarWithOpenBrace());
+            output.verseNumber.openTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize chapter numbers, meaning it...', function() {
+        beforeEach(function() {
+            output.chapterNumber = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin a chapter number section when it encounters %{', function() {
+            translator.translate(tokens.PercentWithOpenBrace());
+            output.chapterNumber.openTag.calledOnce.should.be.true;
         });
     });
 
