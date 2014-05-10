@@ -50,9 +50,21 @@ katasemeion.make.translator = function(tokens, output) {
         return conditionals[0];
     };
 
+    var toggle = function(outputter) {
+        var on = false;
+        return function() {
+            if (on) {
+                outputter.closeTag();
+            } else {
+                outputter.openTag();
+            }
+            on = !on;
+        };
+    };
+
     self.translate = buildTranslator([
-        map(tokens.PercentWithOpenBrace).to(output.chapterNumber.openTag),
-        map(tokens.DollarWithOpenBrace).to(output.verseNumber.openTag),
+        map(tokens.Percent).to(toggle(output.chapterNumber)),
+        map(tokens.Caret).to(toggle(output.verseNumber)),
         map(tokens.DoubleNewline).to(function() {
             output.paragraph.closeTag();
             output.paragraph.openTag();

@@ -116,20 +116,12 @@ describe('Κατασημεῖον tokens module', function() {
             isTokenType(tokens.Hash).should.be.true;
         });
 
-        it('should include dollar sign', function() {
-            isTokenType(tokens.Dollar).should.be.true;
-        });
-
-        it('should include dollar sign with an open curly brace combination', function() {
-            isTokenType(tokens.DollarWithOpenBrace).should.be.true;
+        it('should include caret', function() {
+            isTokenType(tokens.Caret).should.be.true;
         });
 
         it('should include percent sign', function() {
             isTokenType(tokens.Percent).should.be.true;
-        });
-
-        it('should include percent sign with an open curly brace combination', function() {
-            isTokenType(tokens.PercentWithOpenBrace).should.be.true;
         });
 
         it('should include plain text character', function() {

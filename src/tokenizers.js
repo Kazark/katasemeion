@@ -63,13 +63,9 @@ katasemeion.tokenizers = (function(tokens) {
                       unlessFollowedBy('{').
                       thenReturn(tokens.AtWithOpenBrace);
     self.tokenizePercent = ifCharIs('%').
-                           thenReturn(tokens.Percent).
-                           unlessFollowedBy('{').
-                           thenReturn(tokens.PercentWithOpenBrace);
-    self.tokenizeDollar = ifCharIs('$').
-                          thenReturn(tokens.Dollar).
-                          unlessFollowedBy('{').
-                          thenReturn(tokens.DollarWithOpenBrace);
+                           thenReturn(tokens.Percent);
+    self.tokenizeCaret = ifCharIs('^').
+                         thenReturn(tokens.Caret);
     self.tokenizeCloseBrace = ifCharIs('}').
                               thenReturn(tokens.CloseBrace);
 

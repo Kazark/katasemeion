@@ -92,9 +92,14 @@ describe('translator', function() {
             output.verseNumber = outputterMock;
             buildTestSubject();
         });
-        it('should begin a verse number section when it encounters ${', function() {
-            translator.translate(tokens.DollarWithOpenBrace());
+        it('should begin a verse number section when it encounters an initial ^', function() {
+            translator.translate(tokens.Caret());
             output.verseNumber.openTag.calledOnce.should.be.true;
+        });
+        it('should end a verse number section when it encounters a second ^', function() {
+            translator.translate(tokens.Caret());
+            translator.translate(tokens.Caret());
+            output.verseNumber.closeTag.calledOnce.should.be.true;
         });
     });
 
@@ -103,9 +108,14 @@ describe('translator', function() {
             output.chapterNumber = outputterMock;
             buildTestSubject();
         });
-        it('should begin a chapter number section when it encounters %{', function() {
-            translator.translate(tokens.PercentWithOpenBrace());
+        it('should begin a chapter number section when it encounters an initial %', function() {
+            translator.translate(tokens.Percent());
             output.chapterNumber.openTag.calledOnce.should.be.true;
+        });
+        it('should end a chapter number section when it encounters a second %', function() {
+            translator.translate(tokens.Percent());
+            translator.translate(tokens.Percent());
+            output.chapterNumber.closeTag.calledOnce.should.be.true;
         });
     });
 

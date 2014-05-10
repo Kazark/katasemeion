@@ -265,7 +265,7 @@ describe('Κατασημεῖον tokenizers module', function() {
             characters.current.should.equal('a');
         });
 
-        it('should return a hash token when stream cursor points to a hash with no following v or c', function() {
+        it('should return a hash token when stream cursor points to a hash', function() {
             var characters = sourceStream('#sdf');
             var token = tokenize(characters);
             characters.current.should.equal('s');
@@ -283,43 +283,29 @@ describe('Κατασημεῖον tokenizers module', function() {
             characters.current.should.equal('a');
         });
 
-        it('should return a percent sign token when stream is at a percent sign with no open brace', function() {
+        it('should return a percent sign token when stream is at a percent sign', function() {
             var characters = sourceStream('%sdf');
             var token = tokenize(characters);
             characters.current.should.equal('s');
             token.is(tokens.Percent).should.be.true;
         });
-
-        it('should return a "percent sign with open brace" token when stream is at that combination', function() {
-            var characters = sourceStream('%{df');
-            var token = tokenize(characters);
-            characters.current.should.equal('d');
-            token.is(tokens.PercentWithOpenBrace).should.be.true;
-        });
     });
 
-    describe('dollar sign tokenizer', function() {
-        var tokenize =  tokenizers.tokenizeDollar;
+    describe('caret sign tokenizer', function() {
+        var tokenize =  tokenizers.tokenizeCaret;
 
-        it('should do nothing if there is no dollar sign at the beginning of the stream', function() {
+        it('should do nothing if there is no caret sign at the beginning of the stream', function() {
             var characters = sourceStream('a$df');
             var token = tokenize(characters);
             should.not.exist(token);
             characters.current.should.equal('a');
         });
 
-        it('should return a dollar sign token when stream is at a dollar sign with no open brace', function() {
-            var characters = sourceStream('$sdf');
+        it('should return a caret sign token when stream is at a caret sign', function() {
+            var characters = sourceStream('^sdf');
             var token = tokenize(characters);
             characters.current.should.equal('s');
-            token.is(tokens.Dollar).should.be.true;
-        });
-
-        it('should return a "dollar sign with open brace" token when stream is at that combination', function() {
-            var characters = sourceStream('${df');
-            var token = tokenize(characters);
-            characters.current.should.equal('d');
-            token.is(tokens.DollarWithOpenBrace).should.be.true;
+            token.is(tokens.Caret).should.be.true;
         });
     });
 });
