@@ -157,9 +157,13 @@ describe('translator', function() {
         });
         it('should output any non-special character it encounters', function() {
             var character = tokens.Character();
-            character.data = "x";
+            character.data = 'x';
             translator.translate(character);
-            output.plaintext.calledWith("x").should.be.true;
+            output.plaintext.calledWith('x').should.be.true;
+        });
+        it('should output a space when it encounters a space token', function() {
+            translator.translate(tokens.Space());
+            output.plaintext.calledWith(' ').should.be.true;
         });
     });
 });

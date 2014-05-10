@@ -85,6 +85,9 @@ katasemeion.make.translator = function(tokens, output) {
         map(tokens.Character).to(function(token) {
             output.plaintext(token.data);
         }),
+        map(tokens.Space).to(function() {
+            output.plaintext(' ');
+        }),
     ]);
 
     return self;
