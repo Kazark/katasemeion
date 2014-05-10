@@ -39,5 +39,7 @@ katasemeion.make.output.html = function(generator) {
     self.paragraph = generator.p();
     self.blockquote = generator.blockquote();
 
+    self.plaintext = generator.plaintext;
+
     return self;
 };
