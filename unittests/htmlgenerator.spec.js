@@ -62,6 +62,10 @@ describe('HTML generator factory', function() {
             isElement(htmlgenerator.head()).should.be.true;
         });
 
+        it('should contain a <meta> element generator', function() {
+            isElement(htmlgenerator.meta()).should.be.true;
+        });
+
         it('should contain a <body> element generator', function() {
             isElement(htmlgenerator.body()).should.be.true;
         });

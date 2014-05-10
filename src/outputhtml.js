@@ -29,6 +29,10 @@ katasemeion.make.output.html = function(generator) {
         return f;
     })();
 
+    self.contentType = generator.meta()
+                                .setAttribute('http-equiv', 'Content-Type')
+                                .setAttribute('content', 'text/html; charset=UTF-8');
+
     self.variant = annotateWith('[', ']');
     self.insertion = annotateWith('⸤', '⸥');
     self.footnoteSubject = annotateWith('⸢', '⸣');
