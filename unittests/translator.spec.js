@@ -149,4 +149,17 @@ describe('translator', function() {
             output.footnote.closeTag.calledOnce.should.be.true;
         });
     });
+
+    describe('should recognize plain text characters, meaning it...', function() {
+        beforeEach(function() {
+            output.plaintext = sinon.spy();
+            buildTestSubject();
+        });
+        it('should output any non-special character it encounters', function() {
+            var character = tokens.Character();
+            character.data = "x";
+            translator.translate(character);
+            output.plaintext.calledWith("x").should.be.true;
+        });
+    });
 });

@@ -6,7 +6,7 @@ katasemeion.make.translator = function(tokens, output) {
         var _action;
         var me = function(token) {
             if (token.is(tokenType)) {
-                _action();
+                _action(token);
             } else {
                 me.passItOn(token);
             }
@@ -82,6 +82,9 @@ katasemeion.make.translator = function(tokens, output) {
         block(output.variant)
             .beginsAt(tokens.DoubleOpenBracket)
             .andEndsAt(tokens.DoubleCloseBracket),
+        map(tokens.Character).to(function(token) {
+            output.plaintext(token.data);
+        }),
     ]);
 
     return self;
