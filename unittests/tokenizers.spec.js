@@ -10,7 +10,7 @@ describe('Κατασημεῖον tokenizers module', function() {
 
     it('should have a list of all the tokenizers', function() {
         tokenizers.all.should.be.ok;
-        tokenizers.all.length.should.equal(13);
+        tokenizers.all.length.should.equal(14);
         tokenizers.all.forEach(function(t) {
             t.should.be.ok;
         });
@@ -174,6 +174,24 @@ describe('Κατασημεῖον tokenizers module', function() {
             var token = tokenize(characters);
             characters.current.should.equal('s');
             token.is(tokens.CloseAngle).should.be.true;
+        });
+    });
+
+    describe('open brace tokenizer', function() {
+        var tokenize =  tokenizers.tokenizeOpenBrace;
+
+        it('should do nothing if there is no open brace at the beginning of the stream', function() {
+            var characters = sourceStream('a{df');
+            var token = tokenize(characters);
+            should.not.exist(token);
+            characters.current.should.equal('a');
+        });
+
+        it('should return a open brace token when stream cursor points to a open brace', function() {
+            var characters = sourceStream('{sdf');
+            var token = tokenize(characters);
+            characters.current.should.equal('s');
+            token.is(tokens.OpenBrace).should.be.true;
         });
     });
 

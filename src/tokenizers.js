@@ -56,6 +56,8 @@ katasemeion.tokenizers = (function(tokens) {
                            thenReturn(tokens.Percent);
     self.tokenizeCaret = ifCharIs('^').
                          thenReturn(tokens.Caret);
+    self.tokenizeOpenBrace = ifCharIs('{').
+                             thenReturn(tokens.OpenBrace);
     self.tokenizeCloseBrace = ifCharIs('}').
                               thenReturn(tokens.CloseBrace);
 
@@ -77,12 +79,12 @@ katasemeion.tokenizers = (function(tokens) {
 
     self.all = [ self.tokenizeOpenBracket, self.tokenizeCloseBracket,
                  self.tokenizeOpenAngle, self.tokenizeCloseAngle,
+                 self.tokenizeOpenBrace, self.tokenizeCloseBrace,
                  self.tokenizeUnderscore,
                  self.tokenizeAsterisk,
                  self.tokenizeAt,
                  self.tokenizePercent,
                  self.tokenizeCaret,
-                 self.tokenizeCloseBrace,
                  self.tokenizeSpaces,
                  self.tokenizeNewline,
                  self.tokenizeHash
