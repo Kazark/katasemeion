@@ -11,6 +11,9 @@ describe('Κατασημεῖον tokenizers module', function() {
     it('should have a list of all the tokenizers', function() {
         tokenizers.all.should.be.ok;
         tokenizers.all.length.should.equal(13);
+        tokenizers.all.forEach(function(t) {
+            t.should.be.ok;
+        });
     });
 
     describe('open bracket tokenizer', function() {

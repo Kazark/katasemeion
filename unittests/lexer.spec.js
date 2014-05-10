@@ -3,7 +3,7 @@ describe('Κατασημεῖον lexer', function() {
     var tokens = katasemeion.tokens;
 
     it('should exist', function() {
-        katasemeion.lexer.should.be.ok;
+        katasemeion.make.lexer.should.be.ok;
     });
 
     describe('lex()', function() {

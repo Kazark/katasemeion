@@ -81,7 +81,7 @@ katasemeion.tokenizers = (function(tokens) {
                  self.tokenizeAsterisk,
                  self.tokenizeAt,
                  self.tokenizePercent,
-                 self.tokenizeDollar,
+                 self.tokenizeCaret,
                  self.tokenizeCloseBrace,
                  self.tokenizeSpaces,
                  self.tokenizeNewline,

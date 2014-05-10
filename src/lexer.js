@@ -28,6 +28,3 @@ katasemeion.make.lexer = function(tokens, tokenizers, callback) {
     };
     return self;
 };
-
-katasemeion.lexer = katasemeion.make.lexer(katasemeion.tokens, katasemeion.tokenizers, function() {});
-
