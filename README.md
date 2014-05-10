@@ -26,7 +26,7 @@ are used to denote bold text, (`**bolded**`).
 
 ### Similar to Markdown
 You can format poetry by using indenting that is typically used for code in
-markdown, i.e. beginning each line of verse with four spaces, and adding an
+Markdown, i.e. beginning each line of verse with four spaces, and adding an
 additional four spaces for each further indent that is desired.
 
 ### Other markup in the style of Markdown

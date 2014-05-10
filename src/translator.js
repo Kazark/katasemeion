@@ -65,6 +65,7 @@ katasemeion.make.translator = function(tokens, output) {
     self.translate = buildTranslator([
         map(tokens.Percent).to(toggle(output.chapterNumber)),
         map(tokens.Caret).to(toggle(output.verseNumber)),
+        map(tokens.At).to(toggle(output.footnoteSubject)),
         map(tokens.DoubleNewline).to(function() {
             output.paragraph.closeTag();
             output.paragraph.openTag();
@@ -72,6 +73,9 @@ katasemeion.make.translator = function(tokens, output) {
         block(output.todo)
             .beginsAt(tokens.OpenAngle)
             .andEndsAt(tokens.CloseAngle),
+        block(output.footnote)
+            .beginsAt(tokens.OpenBrace)
+            .andEndsAt(tokens.CloseBrace),
         block(output.insertion)
             .beginsAt(tokens.OpenBracket)
             .andEndsAt(tokens.CloseBracket),
