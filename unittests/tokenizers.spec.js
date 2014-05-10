@@ -130,11 +130,11 @@ describe('Κατασημεῖον tokenizers module', function() {
             token.is(tokens.At).should.be.true;
         });
 
-        it('should return an "at with open brace" token when stream cursor points to that combination', function() {
+        it('should return an "at" token when stream cursor points to that combination', function() {
             var characters = sourceStream('@{df');
             var token = tokenize(characters);
-            characters.current.should.equal('d');
-            token.is(tokens.AtWithOpenBrace).should.be.true;
+            characters.current.should.equal('{');
+            token.is(tokens.At).should.be.true;
         });
     });
 

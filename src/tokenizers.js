@@ -16,19 +16,11 @@ katasemeion.tokenizers = (function(tokens) {
                 _elseToken = elseToken;
                 return tokenize;
             };
-            tokenize.unlessFollowedBy = function(alternateChar) {
-                return {
-                    thenReturn: function(alternateToken) {
-                        return ifCharIs(character).
-                               then(ifCharIs(alternateChar).
-                                    thenReturn(alternateToken).
-                                    elseReturn(thenFunction));
-                    }
-                };
-            };
             tokenize.elifDoubledReturn = function(doubledToken) {
-                return tokenize.unlessFollowedBy(character)
-                               .thenReturn(doubledToken);
+                return ifCharIs(character).
+                       then(ifCharIs(character).
+                            thenReturn(doubledToken).
+                            elseReturn(thenFunction));
             };
             return tokenize;
         };
@@ -59,9 +51,7 @@ katasemeion.tokenizers = (function(tokens) {
                             thenReturn(tokens.Asterisk).
                             elifDoubledReturn(tokens.DoubleAsterisk);
     self.tokenizeAt = ifCharIs('@').
-                      thenReturn(tokens.At).
-                      unlessFollowedBy('{').
-                      thenReturn(tokens.AtWithOpenBrace);
+                      thenReturn(tokens.At);
     self.tokenizePercent = ifCharIs('%').
                            thenReturn(tokens.Percent);
     self.tokenizeCaret = ifCharIs('^').

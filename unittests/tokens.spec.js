@@ -77,7 +77,7 @@ describe('Κατασημεῖον tokens module', function() {
         });
 
         it('should include an "at" sign with open curly brace combination', function() {
-            isTokenType(tokens.AtWithOpenBrace).should.be.true;
+            isTokenType(tokens.OpenBrace).should.be.true;
         });
 
         it('should include a close curly brace', function() {

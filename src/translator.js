@@ -69,17 +69,6 @@ katasemeion.make.translator = function(tokens, output) {
             output.paragraph.closeTag();
             output.paragraph.openTag();
         }),
-        map(tokens.At).to(function() {
-            output.footnoteSubject.openTag();
-            openedFootnoteSubject = true;
-        }),
-        map(tokens.AtWithOpenBrace).to(function() {
-            if (openedFootnoteSubject) {
-                output.footnoteSubject.closeTag();
-                openedFootnoteSubject = false;
-            }
-            output.footnote.openTag();
-        }),
         block(output.todo)
             .beginsAt(tokens.OpenAngle)
             .andEndsAt(tokens.CloseAngle),

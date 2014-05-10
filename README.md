@@ -18,16 +18,21 @@ hacks from before and convert them into something Markdown-like.
 the system but rather the target state of the system, since this is still in
 early development.
 
-### Similarities to Markdown
+### Same as Markdown
 Paragraphs are separated by two newlines. `#` is used to denote the top-level
-title. Single asterisks (`*italicized*`) are used to denote italics, as are
-underscores (`_italicized_`). Double asterisks are used to denote bold text,
-(`**bolded**`).
+title. `##` is used for section headers. Single asterisks (`*italicized*`) are
+used to denote italics, as are underscores (`_italicized_`). Double asterisks
+are used to denote bold text, (`**bolded**`).
 
-### Other markup
-Footnotes are denoted by and "at" sign, with brackets: `@{footnote text}`. You
-can denote what text the footnote applies to by adding another "at" sign
-previous to the footnote: `@text under question@{footnote about it}`.
+### Similar to Markdown
+You can format poetry by using indenting that is typically used for code in
+markdown, i.e. beginning each line of verse with four spaces, and adding an
+additional four spaces for each further indent that is desired.
+
+### Other markup in the style of Markdown
+Footnotes are denoted by brackets: `{footnote text}`. You can denote what text
+the footnote applies to by adding a pair of "at" signs previous to the footnote:
+`@text under question@{footnote about it}`.
 
 You can mark some places with "todo" notation for revisiting later by using
 angle brackets: `<Jesus answered, saying>`. You can mark a section of text as
@@ -36,10 +41,6 @@ Light, but [he had come] so that he might witness about the Light.` You can mark
 a section as being left out in some manuscripts by using double square brackets:
 `the one coming from heaven [[is above all]]`.
 
-You can insert automatic chapter numbers with `%` and verse numbers with `^`.
+You can insert automatic chapter numbers with `%%` and verse numbers with `^^`.
 You can explicitly specify chapter numbers explicitly like `%4%` and verse
 numbers explicitly with the corresponding notation: `^8a^`.
-
-You can format verse by using indenting that is typically used for code in
-markup, i.e. beginning each line of verse with four spaces, and adding an
-additional four spaces for each further indent that is desired.
