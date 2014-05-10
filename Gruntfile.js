@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
-    var mainOutputScript = 'build/katasemeion.js';
+    var libOutputScript = 'build/katasemeion.js';
+    var mainOutputScript = 'build/app.js';
     var specPathGlob = 'unittests/*.spec.js';
     var concattedSpecs = 'build/specs.js';
     grunt.initConfig({
@@ -7,8 +8,8 @@ module.exports = function(grunt) {
             options: {
                 separator: ''
             },
-            app: {
-                dest: mainOutputScript,
+            lib: {
+                dest: libOutputScript,
                 src: [
                     'src/intro.js.frag',
                     'src/sourceStream.js',
@@ -20,6 +21,13 @@ module.exports = function(grunt) {
                     'src/htmlgenerator.js',
                     'src/outputhtml.js',
                     'src/outro.js.frag'
+                ]
+            },
+            app: {
+                dest: mainOutputScript,
+                src: [
+                    libOutputScript,
+                    'src/main.js'
                 ]
             },
             specs: {
@@ -40,7 +48,7 @@ module.exports = function(grunt) {
                     eqeqeq: true
                 },
                 files: {
-                    src: mainOutputScript
+                    src: libOutputScript
                 }
             }
         },

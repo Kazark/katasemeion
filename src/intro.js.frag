@@ -3,4 +3,3 @@ var katasemeion = (function() {
     var katasemeion = {};
     katasemeion.make = {};
     katasemeion.make.output = {};
-    katasemeion.output = {};
