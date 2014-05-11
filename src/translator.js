@@ -66,10 +66,6 @@ katasemeion.make.translator = function(tokens, output) {
         map(tokens.Percent).to(toggle(output.chapterNumber)),
         map(tokens.Caret).to(toggle(output.verseNumber)),
         map(tokens.At).to(toggle(output.footnoteSubject)),
-        map(tokens.DoubleNewline).to(function() {
-            output.paragraph.closeTag();
-            output.paragraph.openTag();
-        }),
         block(output.todo)
             .beginsAt(tokens.OpenAngle)
             .andEndsAt(tokens.CloseAngle),
@@ -87,6 +83,13 @@ katasemeion.make.translator = function(tokens, output) {
         }),
         map(tokens.Space).to(function() {
             output.plaintext(' ');
+        }),
+        map(tokens.Newline).to(function() {
+            output.plaintext('\n');
+        }),
+        map(tokens.DoubleNewline).to(function() {
+            output.paragraph.closeTag();
+            output.paragraph.openTag();
         }),
     ]);
 

@@ -155,15 +155,19 @@ describe('translator', function() {
             output.plaintext = sinon.spy();
             buildTestSubject();
         });
-        it('should output any non-special character it encounters', function() {
+        it('should output a space when it encounters a space token', function() {
+            translator.translate(tokens.Space());
+            output.plaintext.calledWith(' ').should.be.true;
+        });
+        it('should output a single newline when it encounters it', function() {
+            translator.translate(tokens.Newline());
+            output.plaintext.calledWith('\n').should.be.true;
+        });
+        it('should output any other non-special character it encounters', function() {
             var character = tokens.Character();
             character.data = 'x';
             translator.translate(character);
             output.plaintext.calledWith('x').should.be.true;
-        });
-        it('should output a space when it encounters a space token', function() {
-            translator.translate(tokens.Space());
-            output.plaintext.calledWith(' ').should.be.true;
         });
     });
 });

@@ -6,7 +6,7 @@ var main = function() {
     var output = katasemeion.make.output.html(generator);
     var translator = katasemeion.make.translator(katasemeion.tokens, output);
     var lexer = katasemeion.make.lexer(katasemeion.tokens, katasemeion.tokenizers, translator.translate);
-    fs.readFile('test.katasemeion', 'utf8', function(error, data) {
+    fs.readFile(process.argv[2], 'utf8', function(error, data) {
         if (error)
         {
             return console.error(error);
