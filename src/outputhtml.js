@@ -5,6 +5,7 @@ katasemeion.make.output.html = function(generator) {
     };
     var footnoteMarker = generator.span().setClass('footnote-marker');
     var footnoteContents = generator.span().setClass('footnote');
+    var footnoteHoverArea = generator.span().setClass('footnote-hover-area');
 
     function annotateWith(beginSymbol, endSymbol) {
         var annotated = {};
@@ -20,11 +21,13 @@ katasemeion.make.output.html = function(generator) {
     self.footnote = (function() {
         var f = {};
         f.openTag = function() {
+            footnoteHoverArea.openTag();
             footnoteMarker.wrap('*');
             footnoteContents.openTag();
         };
         f.closeTag = function() {
             footnoteContents.closeTag();
+            footnoteHoverArea.closeTag();
         };
         return f;
     })();
@@ -48,9 +51,30 @@ katasemeion.make.output.html = function(generator) {
     self.verseNumber = generator.span().setClass('verse-number');
     self.todo = generator.span().setClass('todo');
     self.paragraph = generator.p();
+    self.root = generator.html();
+    self.metadata = generator.head();
+    self.document = generator.body();
     self.blockquote = generator.blockquote();
 
     self.plaintext = generator.plaintext;
+
+    self.begin = function() {
+        self.root.openTag();
+        self.metadata.openTag();
+        self.contentType.wrap('');
+        self.stylesheet('css/base.css').wrap('');
+        self.stylesheet('css/annotated.css').wrap('');
+        self.metadata.closeTag();
+        self.document.openTag();
+        self.mainTextBlock.openTag();
+        self.paragraph.openTag();
+    };
+
+    self.end = function() {
+        self.mainTextBlock.closeTag();
+        self.document.closeTag();
+        self.root.closeTag();
+    };
 
     return self;
 };

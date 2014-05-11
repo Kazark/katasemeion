@@ -12,7 +12,9 @@ var main = function() {
             return console.error(error);
         }
         var stream = katasemeion.sourceStream(data);
+        output.begin();
         lexer.lex(stream);
+        output.end();
         process.stdout.write('\n');
     });
 };

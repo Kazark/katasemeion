@@ -1,0 +1,64 @@
+body {
+  background:black;
+  font-size:11pt;
+}
+
+#main-text-block {
+  width:80ex;
+  margin:0px auto 0px auto;
+  padding:1px 1ex 1px 1ex;
+  color:black;
+  background:white;
+  border-radius:1em;
+}
+
+#main-text-block p {
+  text-align:justify;
+  /*hyphens:auto;*/
+}
+
+span.verse-number {
+  vertical-align:super;
+  font-size:xx-small;
+}
+
+span.em {
+  font-style:italic;
+}
+
+span.todo {
+  background:red;
+  border-radius:1.3ex;
+  padding:0.3ex;
+}
+span.chapter-number {
+  font-size:120%;
+  font-weight:bolder;
+  padding-right:0.5ex;
+}
+
+.footnote {
+  position:absolute; /* don't push other text out of the way */
+  visibility:hidden;
+  font-size:85%;
+  text-align:left; /* don't justify in footnotes: the bubbles are too small for that to look right */
+  background:yellow;
+  border-radius:1ex;
+  padding:0.5ex;
+  margin:1ex 0ex 0ex 0.5ex;
+  max-width:66ex;
+}
+
+.footnote-hover-area:hover .footnote {
+  visibility:visible;
+}
+
+.ln {
+  display:block;
+  padding-left:1em;
+}
+
+.hg {
+  display:block;
+  padding-left:2em;
+}

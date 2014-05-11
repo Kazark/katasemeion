@@ -23,6 +23,21 @@ describe('output module for HTML', function() {
         outputText.should.equal('<span class="chapter-number">');
     });
 
+    it('should know how to output an HTML top-level element', function() {
+        html.root.openTag();
+        outputText.should.equal('<html>');
+    });
+
+    it('should know how to output an HTML metadata', function() {
+        html.metadata.openTag();
+        outputText.should.equal('<head>');
+    });
+
+    it('should know how to output an HTML document body', function() {
+        html.document.openTag();
+        outputText.should.equal('<body>');
+    });
+
     it('should know how to output the HTML format for a paragraph', function() {
         html.paragraph.openTag();
         outputText.should.equal('<p>');
@@ -89,11 +104,11 @@ describe('output module for HTML', function() {
     describe('for footnote contents', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.footnote.openTag();
-            outputText.should.equal('<span class="footnote-marker">*</span><span class="footnote">');
+            outputText.should.equal('<span class="footnote-hover-area"><span class="footnote-marker">*</span><span class="footnote">');
         });
         it('should know how to output the HTML format for ending the section', function() {
             html.footnote.closeTag();
-            outputText.should.equal('</span>');
+            outputText.should.equal('</span></span>');
         });
     });
 });

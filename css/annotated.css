@@ -1,0 +1,13 @@
+@media screen {
+}
+@media print {
+}
+.annotation {
+  color:#a0a0a0;
+}
+.footnote-marker {
+  color:#a0a0a0;
+}
+.verse-number {
+  font-weight:bold;
+}
