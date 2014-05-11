@@ -1,10 +1,10 @@
 katasemeion.make.output.html = function(generator) {
-    var annotation = generator.span().setAttribute('class', 'annotation');
+    var annotation = generator.span().setClass('annotation');
     var self = {
         write: {}
     };
-    var footnoteMarker = generator.span().setAttribute('class', 'footnote-marker');
-    var footnoteContents = generator.span().setAttribute('class', 'footnote');
+    var footnoteMarker = generator.span().setClass('footnote-marker');
+    var footnoteContents = generator.span().setClass('footnote');
 
     function annotateWith(beginSymbol, endSymbol) {
         var annotated = {};
@@ -32,14 +32,15 @@ katasemeion.make.output.html = function(generator) {
     self.contentType = generator.meta()
                                 .setAttribute('http-equiv', 'Content-Type')
                                 .setAttribute('content', 'text/html; charset=UTF-8');
+    self.mainTextBlock = generator.div().setAttribute('id', 'main-text-block');
 
     self.variant = annotateWith('[', ']');
     self.insertion = annotateWith('⸤', '⸥');
     self.footnoteSubject = annotateWith('⸢', '⸣');
 
-    self.chapterNumber = generator.span().setAttribute('class', 'chapter-number');
-    self.verseNumber = generator.span().setAttribute('class', 'verse-number');
-    self.todo = generator.span().setAttribute('class', 'todo');
+    self.chapterNumber = generator.span().setClass('chapter-number');
+    self.verseNumber = generator.span().setClass('verse-number');
+    self.todo = generator.span().setClass('todo');
     self.paragraph = generator.p();
     self.blockquote = generator.blockquote();
 

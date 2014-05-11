@@ -43,6 +43,12 @@ describe('HTML generator factory', function() {
             element.closeTag();
             outputText.should.equal('</body>');
         });
+
+        it('should know how to add a class attribute', function() {
+            var element = htmlgenerator.element('div').setClass('foo');
+            element.openTag();
+            outputText.should.equal('<div class="foo">');
+        });
     });
 
     describe('specific element generators', function() {

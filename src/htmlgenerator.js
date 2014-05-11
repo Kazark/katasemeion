@@ -7,6 +7,9 @@ katasemeion.make.htmlgenerator = function(outFunction) {
             attributes += ' ' + name + '="' + value + '"';
             return elem;
         };
+        elem.setClass = function(className) {
+            return elem.setAttribute('class', className);
+        };
         elem.openTag = function() {
             outFunction('<' + tagName + attributes + '>');
         };

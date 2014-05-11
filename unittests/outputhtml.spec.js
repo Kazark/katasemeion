@@ -38,6 +38,11 @@ describe('output module for HTML', function() {
         outputText.should.equal('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">');
     });
 
+    it('should know how to output the HTML format for the main text block', function() {
+        html.mainTextBlock.openTag();
+        outputText.should.equal('<div id="main-text-block">');
+    });
+
     it('should know how to output the HTML format for section marked TODO', function() {
         html.todo.openTag();
         outputText.should.equal('<span class="todo">');
