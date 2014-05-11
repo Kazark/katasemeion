@@ -32,6 +32,12 @@ katasemeion.make.output.html = function(generator) {
     self.contentType = generator.meta()
                                 .setAttribute('http-equiv', 'Content-Type')
                                 .setAttribute('content', 'text/html; charset=UTF-8');
+    self.stylesheet = function(path) {
+        return generator.link()
+                        .setAttribute('rel', 'stylesheet')
+                        .setAttribute('type', 'text/css')
+                        .setAttribute('href', path);
+    };
     self.mainTextBlock = generator.div().setAttribute('id', 'main-text-block');
 
     self.variant = annotateWith('[', ']');

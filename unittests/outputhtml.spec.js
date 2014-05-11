@@ -43,6 +43,11 @@ describe('output module for HTML', function() {
         outputText.should.equal('<div id="main-text-block">');
     });
 
+    it('should know how to output a linke to a CSS stylesheet', function() {
+        html.stylesheet('css/base.css').openTag();
+        outputText.should.equal('<link rel="stylesheet" type="text/css" href="css/base.css">');
+    });
+
     it('should know how to output the HTML format for section marked TODO', function() {
         html.todo.openTag();
         outputText.should.equal('<span class="todo">');

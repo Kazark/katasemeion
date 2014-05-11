@@ -27,6 +27,7 @@ katasemeion.make.htmlgenerator = function(outFunction) {
     self.html = function() { return self.element('html'); };
     self.head = function() { return self.element('head'); };
     self.meta = function() { return self.element('meta'); };
+    self.link = function() { return self.element('link'); };
     self.body = function() { return self.element('body'); };
     self.p = function() { return self.element('p'); };
     self.blockquote = function() { return self.element('blockquote'); };
