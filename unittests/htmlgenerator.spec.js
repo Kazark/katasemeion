@@ -56,44 +56,46 @@ describe('HTML generator factory', function() {
             htmlgenerator = katasemeion.make.htmlgenerator();
         });
 
-        function isElement(object) {
-            return object && typeof object.closeTag === 'function' && typeof object.openTag === 'function';
+        function shouldBeAnElement(object) {
+            object.should.be.ok;
+            object.openTag.should.be.a('function');
+            object.closeTag.should.be.a('function');
         }
 
         it('should contain a top-level <html> element generator', function() {
-            isElement(htmlgenerator.html()).should.be.true;
+            shouldBeAnElement(htmlgenerator.html());
         });
 
         it('should contain a <head> element generator', function() {
-            isElement(htmlgenerator.head()).should.be.true;
+            shouldBeAnElement(htmlgenerator.head());
         });
 
         it('should contain a <meta> element generator', function() {
-            isElement(htmlgenerator.meta()).should.be.true;
+            shouldBeAnElement(htmlgenerator.meta());
         });
 
         it('should contain a <link> element generator', function() {
-            isElement(htmlgenerator.link()).should.be.true;
+            shouldBeAnElement(htmlgenerator.link());
         });
 
         it('should contain a <body> element generator', function() {
-            isElement(htmlgenerator.body()).should.be.true;
+            shouldBeAnElement(htmlgenerator.body());
         });
 
         it('should contain a <p> paragraph element generator', function() {
-            isElement(htmlgenerator.p()).should.be.true;
+            shouldBeAnElement(htmlgenerator.p());
         });
 
         it('should contain a <blockquote> paragraph element generator', function() {
-            isElement(htmlgenerator.blockquote()).should.be.true;
+            shouldBeAnElement(htmlgenerator.blockquote());
         });
 
         it('should contain a <span> paragraph element generator', function() {
-            isElement(htmlgenerator.span()).should.be.true;
+            shouldBeAnElement(htmlgenerator.span());
         });
 
         it('should contain a <div> paragraph element generator', function() {
-            isElement(htmlgenerator.div()).should.be.true;
+            shouldBeAnElement(htmlgenerator.div());
         });
     });
 });
