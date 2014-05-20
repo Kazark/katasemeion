@@ -97,6 +97,14 @@ describe('HTML generator factory', function() {
         it('should contain a <div> paragraph element generator', function() {
             shouldBeAnElement(htmlgenerator.div());
         });
+
+        it('should contain a <b> bold text element generator', function() {
+            shouldBeAnElement(htmlgenerator.b());
+        });
+
+        it('should contain a <i> italic text element generator', function() {
+            shouldBeAnElement(htmlgenerator.i());
+        });
     });
 });
 

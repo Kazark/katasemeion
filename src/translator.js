@@ -65,6 +65,9 @@ katasemeion.make.translator = function(tokens, output) {
     self.translate = buildTranslator([
         map(tokens.Percent).to(toggle(output.chapterNumber)),
         map(tokens.Caret).to(toggle(output.verseNumber)),
+        map(tokens.DoubleAsterisk).to(toggle(output.bold)),
+        map(tokens.Asterisk).to(toggle(output.italic)),
+        map(tokens.Underscore).to(toggle(output.italic)),
         map(tokens.At).to(toggle(output.footnoteSubject)),
         block(output.todo)
             .beginsAt(tokens.OpenAngle)

@@ -43,6 +43,16 @@ describe('output module for HTML', function() {
         outputText.should.equal('<p>');
     });
 
+    it('should know how to output the HTML format for bold text', function() {
+        html.bold.openTag();
+        outputText.should.equal('<b>');
+    });
+
+    it('should know how to output the HTML format for italics', function() {
+        html.italic.openTag();
+        outputText.should.equal('<i>');
+    });
+
     it('should know how to output the HTML format for a block quote', function() {
         html.blockquote.openTag();
         outputText.should.equal('<blockquote>');

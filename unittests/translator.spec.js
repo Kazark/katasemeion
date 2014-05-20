@@ -87,6 +87,47 @@ describe('translator', function() {
         });
     });
 
+    describe('should recognize italic text, meaning it...', function() {
+        beforeEach(function() {
+            output.italic = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin the section when it encounters an initial *', function() {
+            translator.translate(tokens.Asterisk());
+            output.italic.openTag.calledOnce.should.be.true;
+        });
+        it('should end the section when it encounters a second *', function() {
+            translator.translate(tokens.Asterisk());
+            translator.translate(tokens.Asterisk());
+            output.italic.closeTag.calledOnce.should.be.true;
+        });
+        it('should begin the section when it encounters an initial _', function() {
+            translator.translate(tokens.Underscore());
+            output.italic.openTag.calledOnce.should.be.true;
+        });
+        it('should end the section when it encounters a second _', function() {
+            translator.translate(tokens.Underscore());
+            translator.translate(tokens.Underscore());
+            output.italic.closeTag.calledOnce.should.be.true;
+        });
+    });
+
+    describe('should recognize bold text, meaning it...', function() {
+        beforeEach(function() {
+            output.bold = outputterMock;
+            buildTestSubject();
+        });
+        it('should begin the section when it encounters an initial **', function() {
+            translator.translate(tokens.DoubleAsterisk());
+            output.bold.openTag.calledOnce.should.be.true;
+        });
+        it('should end the section when it encounters a second **', function() {
+            translator.translate(tokens.DoubleAsterisk());
+            translator.translate(tokens.DoubleAsterisk());
+            output.bold.closeTag.calledOnce.should.be.true;
+        });
+    });
+
     describe('should recognize verse numbers, meaning it...', function() {
         beforeEach(function() {
             output.verseNumber = outputterMock;
