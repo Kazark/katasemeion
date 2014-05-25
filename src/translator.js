@@ -1,6 +1,14 @@
 katasemeion.make.translator = function(tokens, output) {
     var self = {};
     var openedFootnoteSubject = false;
+    var indentLevel = 0;
+
+    function closeIndents() {
+        while (indentLevel > 0) {
+            output.indented.closeTag();
+            indentLevel--;
+        }
+    }
 
     var map = function(tokenType) {
         var _action;
@@ -88,11 +96,17 @@ katasemeion.make.translator = function(tokens, output) {
             output.plaintext(' ');
         }),
         map(tokens.Newline).to(function() {
+            closeIndents();
             output.plaintext('\n');
         }),
         map(tokens.DoubleNewline).to(function() {
+            closeIndents();
             output.paragraph.closeTag();
             output.paragraph.openTag();
+        }),
+        map(tokens.Indent).to(function() {
+            output.indented.openTag();
+            indentLevel++;
         }),
     ]);
 

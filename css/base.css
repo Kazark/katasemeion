@@ -53,12 +53,7 @@ span.chapter-number {
   visibility:visible;
 }
 
-.ln {
+.indent {
   display:block;
-  padding-left:1em;
-}
-
-.hg {
-  display:block;
-  padding-left:2em;
+  padding-left:4ex;
 }

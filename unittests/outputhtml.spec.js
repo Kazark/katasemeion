@@ -53,6 +53,11 @@ describe('output module for HTML', function() {
         outputText.should.equal('<i>');
     });
 
+    it('should know how to output the HTML format for a an indented line', function() {
+        html.indented.openTag();
+        outputText.should.equal('<div class="indent">');
+    });
+
     it('should know how to output the HTML format for a block quote', function() {
         html.blockquote.openTag();
         outputText.should.equal('<blockquote>');

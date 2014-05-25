@@ -211,4 +211,68 @@ describe('translator', function() {
             output.plaintext.calledWith('x').should.be.true;
         });
     });
+
+    describe('should recognize indented blocked, meaning it...', function() {
+        beforeEach(function() {
+            output.indented = outputterMock;
+            buildTestSubject();
+        });
+
+        it('should open an indented line when it encounters an indent token', function() {
+            translator.translate(tokens.Indent());
+
+            output.indented.openTag.calledOnce.should.be.true;
+        });
+
+        describe('when it encounters a newline', function() {
+            beforeEach(function() {
+                output.plaintext = sinon.spy();
+            });
+
+            it('should close the indented line', function() {
+                translator.translate(tokens.Indent());
+
+                translator.translate(tokens.Newline());
+
+                output.indented.closeTag.calledOnce.should.be.true;
+            });
+
+            it('should close a number of indentation blocks equal to the level of indentation', function() {
+                translator.translate(tokens.Indent());
+                translator.translate(tokens.Indent());
+                translator.translate(tokens.Indent());
+
+                translator.translate(tokens.Newline());
+
+                output.indented.closeTag.calledThrice.should.be.true;
+            });
+        });
+
+        describe('when it encounters the end of a paragraph', function() {
+            beforeEach(function() {
+                output.paragraph = {
+                    openTag: sinon.spy(),
+                    closeTag: sinon.spy(),
+                };
+            });
+
+            it('should close the indented line', function() {
+                translator.translate(tokens.Indent());
+
+                translator.translate(tokens.DoubleNewline());
+
+                output.indented.closeTag.calledOnce.should.be.true;
+            });
+
+            it('should close a number of indentation blocks equal to the level of indentation', function() {
+                translator.translate(tokens.Indent());
+                translator.translate(tokens.Indent());
+                translator.translate(tokens.Indent());
+
+                translator.translate(tokens.DoubleNewline());
+
+                output.indented.closeTag.calledThrice.should.be.true;
+            });
+        });
+    });
 });

@@ -57,6 +57,7 @@ katasemeion.make.output.html = function(generator) {
     self.metadata = generator.head();
     self.document = generator.body();
     self.blockquote = generator.blockquote();
+    self.indented = generator.div().setClass('indent');
 
     self.plaintext = generator.plaintext;
 
