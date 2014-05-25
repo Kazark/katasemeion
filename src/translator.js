@@ -1,14 +1,22 @@
 katasemeion.make.translator = function(tokens, output) {
     var self = {};
     var openedFootnoteSubject = false;
-    var indentLevel = 0;
 
-    function closeIndents() {
-        while (indentLevel > 0) {
-            output.indented.closeTag();
-            indentLevel--;
-        }
-    }
+    var indentation = (function() {
+        var indentLevel = 0;
+        var x = {};
+        x.increase = function() {
+            output.indented.openTag();
+            indentLevel++;
+        };
+        x.reset = function() {
+            while (indentLevel > 0) {
+                output.indented.closeTag();
+                indentLevel--;
+            }
+        };
+        return x;
+    })();
 
     var map = function(tokenType) {
         var _action;
@@ -96,18 +104,15 @@ katasemeion.make.translator = function(tokens, output) {
             output.plaintext(' ');
         }),
         map(tokens.Newline).to(function() {
-            closeIndents();
+            indentation.reset();
             output.plaintext('\n');
         }),
         map(tokens.DoubleNewline).to(function() {
-            closeIndents();
+            indentation.reset();
             output.paragraph.closeTag();
             output.paragraph.openTag();
         }),
-        map(tokens.Indent).to(function() {
-            output.indented.openTag();
-            indentLevel++;
-        }),
+        map(tokens.Indent).to(indentation.increase),
     ]);
 
     return self;
