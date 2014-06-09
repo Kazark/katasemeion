@@ -1,6 +1,6 @@
 {
   "name": "katasemeion",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "A markdown-inspired markup language for formatting Biblical texts",
   "main": "katasemeion.js",
   "scripts": {
