@@ -124,6 +124,22 @@ describe('Κατασημεῖον tokens module', function() {
             isTokenType(tokens.Percent).should.be.true;
         });
 
+        it('should include single quote', function() {
+            isTokenType(tokens.SingleQuote).should.be.true;
+        });
+
+        it('should include backtick', function() {
+            isTokenType(tokens.Backtick).should.be.true;
+        });
+
+        it('should include double single-quote', function() {
+            isTokenType(tokens.DoubleSingleQuote).should.be.true;
+        });
+
+        it('should include double backtick', function() {
+            isTokenType(tokens.DoubleBacktick).should.be.true;
+        });
+
         it('should include plain text character', function() {
             isTokenType(tokens.Character).should.be.true;
         });

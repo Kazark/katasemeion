@@ -38,6 +38,10 @@ katasemeion.tokens = (function() {
     self.Hash = self.makeTokenType();
     self.Caret = self.makeTokenType();
     self.Character = self.makeTokenType();
+    self.SingleQuote = self.makeTokenType();
+    self.DoubleSingleQuote = self.makeTokenType();
+    self.Backtick = self.makeTokenType();
+    self.DoubleBacktick = self.makeTokenType();
 
     return self;
 })();
