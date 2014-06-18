@@ -91,6 +91,56 @@ describe('Κατασημεῖον tokenizers module', function() {
         });
     });
 
+    describe('backtick tokenizer', function() {
+        var tokenize =  tokenizers.tokenizeBacktick;
+
+        it('should do nothing if there is no backtick at the beginning of the stream', function() {
+            var characters = sourceStream('a`df');
+            var token = tokenize(characters);
+            should.not.exist(token);
+            characters.current.should.equal('a');
+        });
+
+        it('should return a backtick token when stream cursor points to a backtick', function() {
+            var characters = sourceStream('`sdf');
+            var token = tokenize(characters);
+            characters.current.should.equal('s');
+            token.is(tokens.Backtick).should.be.true;
+        });
+
+        it('should return a double backtick token when stream is at two backticks', function() {
+            var characters = sourceStream('``df');
+            var token = tokenize(characters);
+            characters.current.should.equal('d');
+            token.is(tokens.DoubleBacktick).should.be.true;
+        });
+    });
+
+    describe('single quote tokenizer', function() {
+        var tokenize =  tokenizers.tokenizeSingleQuote;
+
+        it('should do nothing if there is no single quote at the beginning of the stream', function() {
+            var characters = sourceStream("a'df");
+            var token = tokenize(characters);
+            should.not.exist(token);
+            characters.current.should.equal('a');
+        });
+
+        it('should return a single quote token when stream cursor points to a single quote', function() {
+            var characters = sourceStream("'sdf");
+            var token = tokenize(characters);
+            characters.current.should.equal('s');
+            token.is(tokens.SingleQuote).should.be.true;
+        });
+
+        it('should return a double single-quote token when stream is at two single quotes', function() {
+            var characters = sourceStream("''df");
+            var token = tokenize(characters);
+            characters.current.should.equal('d');
+            token.is(tokens.DoubleSingleQuote).should.be.true;
+        });
+    });
+
     describe('newline tokenizer', function() {
         var tokenize =  tokenizers.tokenizeNewline;
 

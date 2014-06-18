@@ -50,6 +50,12 @@ katasemeion.tokenizers = (function(tokens) {
     self.tokenizeAsterisk = ifCharIs('*').
                             thenReturn(tokens.Asterisk).
                             elifDoubledReturn(tokens.DoubleAsterisk);
+    self.tokenizeBacktick = ifCharIs('`').
+                            thenReturn(tokens.Backtick).
+                            elifDoubledReturn(tokens.DoubleBacktick);
+    self.tokenizeSingleQuote = ifCharIs("'").
+                               thenReturn(tokens.SingleQuote).
+                               elifDoubledReturn(tokens.DoubleSingleQuote);
     self.tokenizeAt = ifCharIs('@').
                       thenReturn(tokens.At);
     self.tokenizePercent = ifCharIs('%').
