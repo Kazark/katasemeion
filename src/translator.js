@@ -85,6 +85,18 @@ katasemeion.make.translator = function(tokens, output) {
         map(tokens.Asterisk).to(toggle(output.italic)),
         map(tokens.Underscore).to(toggle(output.italic)),
         map(tokens.At).to(toggle(output.footnoteSubject)),
+        map(tokens.DoubleBacktick).to(function() {
+            output.plaintext('"');
+        }),
+        map(tokens.Backtick).to(function() {
+            output.plaintext('\'');
+        }),
+        map(tokens.DoubleSingleQuote).to(function() {
+            output.plaintext('"');
+        }),
+        map(tokens.SingleQuote).to(function() {
+            output.plaintext('\'');
+        }),
         block(output.todo)
             .beginsAt(tokens.OpenAngle)
             .andEndsAt(tokens.CloseAngle),

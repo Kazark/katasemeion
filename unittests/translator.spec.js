@@ -191,6 +191,29 @@ describe('translator', function() {
         });
     });
 
+    describe('should recognize quote marks but only support straight quotes for now, meaning it...', function() {
+        beforeEach(function() {
+            output.plaintext = sinon.spy();
+            buildTestSubject();
+        });
+        it('should output a double quote " when it encounters ``', function() {
+            translator.translate(tokens.DoubleBacktick());
+            output.plaintext.calledWith('"').should.be.true;
+        });
+        it('should output a double quote \' when it encounters `', function() {
+            translator.translate(tokens.Backtick());
+            output.plaintext.calledWith('\'').should.be.true;
+        });
+        it('should output a double quote " when it encounters \'\'', function() {
+            translator.translate(tokens.DoubleSingleQuote());
+            output.plaintext.calledWith('"').should.be.true;
+        });
+        it('should output a single quote \' when it encounters \'', function() {
+            translator.translate(tokens.SingleQuote());
+            output.plaintext.calledWith('\'').should.be.true;
+        });
+    });
+
     describe('should recognize plain text characters, meaning it...', function() {
         beforeEach(function() {
             output.plaintext = sinon.spy();
