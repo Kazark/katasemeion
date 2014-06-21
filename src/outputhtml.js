@@ -61,6 +61,12 @@ katasemeion.make.output.html = function(generator) {
 
     self.plaintext = generator.plaintext;
 
+    self.curvedQuotes = {};
+    self.curvedQuotes.leftDouble = function() { self.plaintext('“'); };
+    self.curvedQuotes.rightDouble = function() { self.plaintext('”'); };
+    self.curvedQuotes.leftSingle = function() { self.plaintext('‘'); };
+    self.curvedQuotes.rightSingle = function() { self.plaintext('’'); };
+
     self.begin = function() {
         self.root.openTag();
         self.metadata.openTag();

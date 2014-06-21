@@ -83,6 +83,25 @@ describe('output module for HTML', function() {
         outputText.should.equal('<span class="todo">');
     });
 
+    describe('Curved quotes output object', function() {
+        it('should know how to output curved left double quote “', function() {
+            html.curvedQuotes.leftDouble();
+            outputText.should.equal('“');
+        });
+        it('should know how to output curved right double quote ”', function() {
+            html.curvedQuotes.rightDouble();
+            outputText.should.equal('”');
+        });
+        it('should know how to output curved left single quote ‘', function() {
+            html.curvedQuotes.leftSingle();
+            outputText.should.equal('‘');
+        });
+        it('should know how to output curved right single quote or apostrophe ’', function() {
+            html.curvedQuotes.rightSingle();
+            outputText.should.equal('’');
+        });
+    });
+
     describe('for a section marked as a textual variant', function() {
         it('should know how to output the HTML format for beginning the section', function() {
             html.variant.openTag();
