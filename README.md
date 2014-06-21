@@ -21,6 +21,7 @@ things that Biblical texts just don't have, like @-style mentions, hyperlinks,
 code blocks, math, and other such modern internet-y stuff that Markdown is
 geared towards. This meant that I could repurpose some of Markdown, and also
 could claim more symbols for specialized verse-number and footnote markup, etc.
+For an example, check out the `example` directory of the project.
 
 If you find this project useful, please let me know so that I can put more
 effort into it. Also, please feel free to submit issues about bugs or feature
