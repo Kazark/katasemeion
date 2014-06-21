@@ -28,18 +28,23 @@ requests.
 
 ### Example
 The `example` directory of the project contains the following example. Here is a
-rought draft of 1 John 1 with Katasemeion markup, in Vim (the Greek words are in
+rough draft of 1 John 1 with Katasemeion markup, in Vim (the Greek words are in
 red because I have not added them to my spell file and spelling is turned on):
 
 ![example in Vim](/example/1John1-katasemeion-in-Vim.png)
 
 And rendered in the browser, you can see that the footnotes pop up and regions
-marked as needing further attention with `<...>` are red.
+marked as needing further attention with `<...>` are red. The light
+half-brackets on the bottom, such as around  the words *about him*, are an
+indicator that the translator wants you to know that he inserted these words.
+The light half-brackets on the top are an indicator of what region the footnote
+pertains to. The rest is fairly self-explanatory; if there were a textual
+variant shown, it would use a light full-bracket.
 
 ![example as HTML](/example/1John1-katasemeion-rendered-as-HTML.png)
 
 The example will be shown rendered in PDF via XeLaTeX once that feature is
-implmented.
+implemented.
 
 ### How to Run It
 Currently it must be run through Node, though I have written it in JavaScript in
