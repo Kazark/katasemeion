@@ -14,7 +14,7 @@ describe('translator', function() {
             openTag: sinon.spy(),
             closeTag: sinon.spy(),
         };
-        output = {};
+        output = { curvedQuotes: {} };
     });
 
     it('should exist', function() {
@@ -191,26 +191,29 @@ describe('translator', function() {
         });
     });
 
-    describe('should recognize quote marks but only support straight quotes for now, meaning it...', function() {
+    describe('should recognize curved quote marks, meaning it...', function() {
         beforeEach(function() {
-            output.plaintext = sinon.spy();
+            output.curvedQuotes.leftDouble = sinon.spy();
+            output.curvedQuotes.leftSingle = sinon.spy();
+            output.curvedQuotes.rightDouble = sinon.spy();
+            output.curvedQuotes.rightSingle = sinon.spy();
             buildTestSubject();
         });
-        it('should output a double quote " when it encounters ``', function() {
+        it('should output a left curved double quote “ when it encounters ``', function() {
             translator.translate(tokens.DoubleBacktick());
-            output.plaintext.calledWith('"').should.be.true;
+            output.curvedQuotes.leftDouble.calledOnce.should.be.true;
         });
-        it('should output a double quote \' when it encounters `', function() {
+        it('should output a left curved single quote ‘ when it encounters `', function() {
             translator.translate(tokens.Backtick());
-            output.plaintext.calledWith('\'').should.be.true;
+            output.curvedQuotes.leftSingle.calledOnce.should.be.true;
         });
-        it('should output a double quote " when it encounters \'\'', function() {
+        it('should output a right curved double quote ” when it encounters \'\'', function() {
             translator.translate(tokens.DoubleSingleQuote());
-            output.plaintext.calledWith('"').should.be.true;
+            output.curvedQuotes.rightDouble.calledOnce.should.be.true;
         });
-        it('should output a single quote \' when it encounters \'', function() {
+        it('should output a right single quote ’ when it encounters \'', function() {
             translator.translate(tokens.SingleQuote());
-            output.plaintext.calledWith('\'').should.be.true;
+            output.curvedQuotes.rightSingle.calledOnce.should.be.true;
         });
     });
 

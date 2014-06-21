@@ -83,7 +83,7 @@ describe('output module for HTML', function() {
         outputText.should.equal('<span class="todo">');
     });
 
-    describe('Curved quotes output object', function() {
+    describe('should know how to output curved quotes, meaning it...', function() {
         it('should know how to output curved left double quote “', function() {
             html.curvedQuotes.leftDouble();
             outputText.should.equal('“');
