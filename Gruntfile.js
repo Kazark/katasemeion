@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
     var libOutputScript = 'build/katasemeion.js';
     var mainOutputScript = 'build/app.js';
-    var specPathGlob = 'unittests/*.spec.js';
+    var specPathGlob = 'specs/*.spec.js';
     var concattedSpecs = 'build/specs.js';
     grunt.initConfig({
         concat: {
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                 reporter: 'Spec',
             },
             test: {
-                src: ['unittests/specs.html'],
+                src: ['specs/specs.html'],
             },
         },
     });
