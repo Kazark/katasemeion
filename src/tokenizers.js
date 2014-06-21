@@ -88,6 +88,8 @@ katasemeion.tokenizers = (function(tokens) {
                  self.tokenizeOpenBrace, self.tokenizeCloseBrace,
                  self.tokenizeUnderscore,
                  self.tokenizeAsterisk,
+                 self.tokenizeBacktick,
+                 self.tokenizeSingleQuote,
                  self.tokenizeAt,
                  self.tokenizePercent,
                  self.tokenizeCaret,
