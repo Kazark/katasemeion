@@ -48,7 +48,11 @@ implemented.
 
 ### How to Run It
 Currently it must be run through Node, though I have written it in JavaScript in
-order to allow for in-browser translation.
+order to allow for in-browser translation. Also, currently it doesn't support
+installs. You will need to pull down the project, build it with grunt, and then
+run it something like this:
+
+    node build/app.js ~/translations/Revelation.katasemeion > ~/translations/output/Revelation.html
 
 ### Same as Markdown
 Paragraphs are separated by two newlines. `#` is used to denote the top-level
