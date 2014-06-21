@@ -21,11 +21,25 @@ things that Biblical texts just don't have, like @-style mentions, hyperlinks,
 code blocks, math, and other such modern internet-y stuff that Markdown is
 geared towards. This meant that I could repurpose some of Markdown, and also
 could claim more symbols for specialized verse-number and footnote markup, etc.
-For an example, check out the `example` directory of the project.
 
 If you find this project useful, please let me know so that I can put more
 effort into it. Also, please feel free to submit issues about bugs or feature
 requests.
+
+### Example
+The `example` directory of the project contains the following example. Here is a
+rought draft of 1 John 1 with Katasemeion markup, in Vim (the Greek words are in
+red because I have not added them to my spell file and spelling is turned on):
+
+![example in Vim](/example/1John1-katasemeion-in-Vim.png)
+
+And rendered in the browser, you can see that the footnotes pop up and regions
+marked as needing further attention with `<...>` are red.
+
+![example as HTML](/example/1John1-katasemeion-rendered-as-HTML.png)
+
+The example will be shown rendered in PDF via XeLaTeX once that feature is
+implmented.
 
 ### How to Run It
 Currently it must be run through Node, though I have written it in JavaScript in
