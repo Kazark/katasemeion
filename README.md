@@ -67,7 +67,7 @@ Markdown, i.e. beginning each line of verse with four spaces, and adding an
 additional four spaces for each further indent that is desired.
 
 ### Same as LaTeX
-You can use pairs of \`\` and '' and pairs of \` and ' to denote curved quotes,
+You can use <code>\`\`...''</code> and <code>\`...'</code> to denote curved quotes,
 as in LaTeX.
 
 ### Other markup in the style of Markdown
