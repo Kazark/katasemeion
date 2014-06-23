@@ -43,6 +43,8 @@ variant shown, it would use a light full-bracket.
 
 ![example as HTML](/example/1John1-katasemeion-rendered-as-HTML.png)
 
+If you don't like the way this HTML renders, you can configure it with CSS.
+
 The example will be shown rendered in PDF via XeLaTeX once that feature is
 implemented.
 
