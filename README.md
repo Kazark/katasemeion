@@ -1,6 +1,6 @@
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-# Κατασημεῖον
+
+# Κατασημεῖον [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![GitHub version](https://badge.fury.io/gh/kazark%2Fkatasemeion.svg)](http://badge.fury.io/gh/kazark%2Fkatasemeion)
 ### Markdown-like markup for formatting Biblical texts
 
 The name is a nerd joke: **κατα-** can be translated *down*; **σημεῖον** can be
