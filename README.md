@@ -1,3 +1,5 @@
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 # Κατασημεῖον
 ### Markdown-like markup for formatting Biblical texts
 
