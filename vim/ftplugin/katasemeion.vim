@@ -19,4 +19,7 @@ setlocal formatoptions-=q
 setlocal formatoptions-=r
 setlocal comments-=:%
 
+" Build to HTML with :make
+let &l:makeprg="katasemeion " . expand('%') . " > output/" . expand('%:t:r') . ".html"
+
 let &cpo = s:save_cpo
