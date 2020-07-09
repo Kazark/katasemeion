@@ -1,3 +1,5 @@
+My view of bible translation and text criticism has changed and thus don't have any use for this anymore.
+
 # Κατασημεῖον [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![GitHub version](https://badge.fury.io/gh/kazark%2Fkatasemeion.svg)](http://badge.fury.io/gh/kazark%2Fkatasemeion)
 ### Markdown-like markup for formatting Biblical texts
 
